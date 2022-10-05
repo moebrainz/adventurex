@@ -1,0 +1,173 @@
+.dashboard__img {
+  background: url(../assets/dashboard/x_dash_icon.png);
+}
+
+.dashboard__img:hover {
+  background: url(../assets/dashboard/x_dashhovers.png);
+}
+
+/* Dashboard List */
+.dashboard__list {
+  list-style: none;
+  padding: 0.7rem 2rem;
+  cursor: pointer;
+}
+
+.dashboard__list:hover {
+  background: rgba(3, 70, 38, 0.06);
+  color: #034626;
+  transform: scaleX(1.04);
+}
+
+.dashboard__list:hover div {
+  background: url("../assets/dashboard/x_dashhovers.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dashboard__list span div {
+  height: 1rem;
+  width: 1rem;
+  cursor: pointer;
+  background: url("../assets/dashboard/x_dash_icon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: inline-block;
+}
+
+/* Packages List */
+.packages__list {
+  list-style: none;
+  padding: 0.7rem 2rem;
+  cursor: pointer;
+}
+
+.packages__list:active {
+  background: rgba(3, 70, 38, 0.06);
+}
+
+.packages__list:hover {
+  background: #0346260f;
+  color: #034626;
+  transform: scaleX(1.04);
+}
+
+.packages__list:hover .pack__icon {
+  background: url("../assets/dashboard/x_packhover.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.packages__list span .pack__icon {
+  height: 1rem;
+  width: 1rem;
+  cursor: pointer;
+  background: url("../assets/dashboard/x_packages_icon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: inline-block;
+}
+
+/* Admin List */
+.admin__list {
+  list-style: none;
+  padding: 0.7rem 2rem;
+  cursor: pointer;
+}
+
+.admin__list:hover {
+  background: rgba(3, 70, 38, 0.06);
+  color: #034626;
+  transform: scaleX(1.04);
+}
+
+.admin__list:hover div {
+  background: url("../assets/dashboard/x_adminhover.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.admin__list span div {
+  height: 1rem;
+  width: 1rem;
+  cursor: pointer;
+  background: url("../assets/dashboard/x_admins_icons.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: inline-block;
+}
+
+/* The container <div> - needed to position the dropdown content */
+/* .dropdown_pack {
+  position: relative;
+  display: inline-block;
+} */
+
+/* Dropdown Content (Hidden by Default) */
+/* .dropdown-content_pack {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+} */
+
+/* Links inside the dropdown */
+/* .dropdown-content_pack a {
+  color: black;
+  text-decoration: none;
+  display: block;
+} */
+
+/* Change color of dropdown links on hover */
+/* .dropdown-content_pack a:hover {
+  background-color: #f1f1f1;
+} */
+
+/* Show the dropdown menu on hover */
+/* .dropdown_pack:hover .dropdown-content_pack {
+  display: block;
+} */
+
+.slide {
+  clear: both;
+  width: 100%;
+  height: 0px;
+  overflow: hidden;
+  /* text-align: center; */
+  transition: height 0.4s ease;
+}
+
+.slide li {
+  margin: 10px 30px;
+  padding: 5px;
+}
+.slide li a {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 16px;
+  color: #32325d;
+}
+.slide li:hover {
+  background: rgba(3, 70, 38, 0.06);
+  padding: 5px;
+  list-style: disc;
+  transform: scaleX(1.04);
+}
+
+#touch {
+  position: absolute;
+  opacity: 0;
+  height: 0px;
+}
+
+#touch:checked + .slide {
+  height: 90px;
+  color: #32325d;
+}

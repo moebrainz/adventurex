@@ -1,0 +1,134 @@
+import React from "react";
+import styled from "styled-components";
+import filter from "../assets/dashboard/x_filter_icon.png";
+import signups from "../assets/dashboard/x_signup_icon.png";
+import completed from "../assets/dashboard/x_ctest.png";
+import uncompleted from "../assets/dashboard/x_uctest.png";
+import savedpackages from "../assets/dashboard/x_saved_packages.png";
+import bookedpackages from "../assets/dashboard/x_booked_packages.png";
+
+import "../css/DashboardContent.css";
+import InfoCard from "./card-reviews/InfoCard";
+
+const DashContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+`;
+
+const FilterWrapper = styled.div`
+  border-bottom: 0.5px solid rgba(50, 50, 93, 0.4);
+`;
+
+const CardWrapper = styled.div`
+  padding: 30px 0px 15px 30px;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+`;
+const DashboardContent = () => {
+  return (
+    <>
+      <div className="container-fluid">
+        <DashContentWrapper>
+          <div className="">
+            <p className="_heading">Hello Admin,</p>
+            <p className="_subheading">Here is your latest report</p>
+          </div>
+          <div className="dash__section2 container-fluid px-0">
+            <FilterWrapper>
+              <div className="filter__button dropdown ">
+                <div
+                  className="border-0"
+                  role="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <button className="border-0 bg-white ">Filter</button>
+                  <img src={filter} className="filter__icon" alt="" />
+                </div>
+
+                <ul
+                  className="dropdown-menu mt-2"
+                  aria-labelledby="dropdownMenuButton1"
+                >
+                  <li>
+                    <a className="dropdown-item" href="">
+                      Daily
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="">
+                      Monthly
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="">
+                      Weekly
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="">
+                      Annually
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </FilterWrapper>
+
+            <CardWrapper className="">
+              <div className="row gap-4">
+                <div className="col">
+                  {" "}
+                  <InfoCard
+                    cardicons={signups}
+                    cardcontent="Signups"
+                    cardvalue={75}
+                  />
+                </div>
+                <div className="col">
+                  {" "}
+                  <InfoCard
+                    cardicons={completed}
+                    cardcontent="Completed Test"
+                    cardvalue={50}
+                  />
+                </div>
+                <div className="col">
+                  {" "}
+                  <InfoCard
+                    cardicons={uncompleted}
+                    cardcontent="Uncompleted Test"
+                    cardvalue={24}
+                  />
+                </div>
+                <div className="col">
+                  {" "}
+                  <InfoCard
+                    cardicons={savedpackages}
+                    cardcontent="Saved Packages"
+                    cardvalue={350}
+                  />
+                </div>
+              </div>
+            </CardWrapper>
+            <CardWrapper>
+              <div className="row">
+                <div className="col-3">
+                  <InfoCard
+                    cardicons={bookedpackages}
+                    cardcontent="Booked Packages"
+                    cardvalue={350}
+                  />
+                </div>
+              </div>
+            </CardWrapper>
+          </div>
+        </DashContentWrapper>
+      </div>
+    </>
+  );
+};
+
+export default DashboardContent;
