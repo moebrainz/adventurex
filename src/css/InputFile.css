@@ -99,3 +99,69 @@
   color: #32325d;
   width: max-content;
 }
+
+/* input edit images */
+
+.upload_pcontainer {
+  width: 20px;
+  height: 20px;
+}
+
+.upload_pcontainer img {
+  width: 100%;
+  height: auto;
+}
+
+.thumbnail_p {
+  width: 120px;
+  height: 120px;
+
+  position: relative;
+  border: 0.3px dashed rgba(50, 50, 93, 0.3);
+  border-radius: 50%;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.thumbnail_p img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.file_wrap_profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.subheading_p {
+  font-weight: 200;
+  font-size: 7px;
+  color: rgba(50, 50, 93, 0.47);
+}
+
+.edit_profile {
+  top: -31%;
+  left: 84%;
+  width: 20px;
+  height: 20px;
+  z-index: 10;
+  position: relative;
+  background: white;
+  border-radius: 50%;
+}
+.edit_profile img {
+  width: 100%;
+  height: auto;
+  vertical-align: inherit;
+}

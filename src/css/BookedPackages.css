@@ -94,7 +94,7 @@ input::placeholder {
   color: #034626;
 }
 
-.booked_bookings_button:hover {
+.unactive-tabs:hover {
   /* width: 100%; */
   height: 36px;
   background: rgba(3, 70, 38, 0.06);
@@ -104,4 +104,64 @@ input::placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.booked_button_otherbookings {
+  width: 57px;
+  height: 20px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #034626;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  border: 0;
+  cursor: pointer;
+}
+
+.button_row {
+  margin-bottom: 10px;
+  width: fit-content !important;
+  padding-bottom: 10p;
+  border-bottom: 0.5px solid #ccc;
+  border-radius: 8px;
+}
+/* booking switching tabs */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  background: #f1f1f1;
+  margin: 100px auto 0;
+}
+
+.bloc-tabs {
+  display: flex;
+}
+
+.unactive-tabs {
+  /* background: white; */
+  font-weight: 600;
+  font-size: 14px;
+  color: #32325d;
+  border: 0;
+  background-color: white;
+}
+
+.content-tabs {
+  flex-grow: 1;
+}
+.content {
+  display: none;
+}
+
+.content p {
+  width: 100%;
+  height: 100%;
+}
+.active-content {
+  display: block;
 }

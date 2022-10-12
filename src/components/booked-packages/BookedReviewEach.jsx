@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import search from "../../assets/images/x_search_icon.png";
 import action from "../../assets/images/x_action.png";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../../css/BookedPackages.css";
 import CardReview from "../card-reviews/CardReview";
+import CardBooked from "../card-reviews/CardBooked";
 
 const DashContentWrapper = styled.div`
   display: flex;
@@ -56,13 +58,47 @@ const BookedWrapper = styled.div`
 `;
 
 export default () => {
+  const navigate = useNavigate();
+
+  const [toggleState, setToggleState] = useState(1);
+
+  const toggleTab = (index) => {
+    setToggleState(index);
+  };
+
   return (
     <>
       <div className="container-fluid">
         <DashContentWrapper>
           <div className="">
             <p className="_heading">
-              {`Booked packages > Review > HighTowers`}{" "}
+              <nav className="breadcrumb_wrapper" aria-label="breadcrumb">
+                <ol className="breadcrumb ol_list_breadcrumb">
+                  <li className="breadcrumb-item">
+                    <Link
+                      onClick={() => navigate(-2)}
+                      className="breadcrumb_link"
+                    >
+                      Booked packages
+                    </Link>{" "}
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link
+                      onClick={() => navigate(-1)}
+                      className="breadcrumb_link"
+                    >
+                      Review
+                    </Link>{" "}
+                  </li>
+                  <li
+                    className="breadcrumb-item active breadcrumb_current"
+                    aria-current="page"
+                  >
+                    Hightowers
+                  </li>
+                </ol>
+              </nav>
+              {/* {`Booked packages > Review > HighTowers`}{" "} */}
             </p>
           </div>
 
@@ -93,16 +129,72 @@ export default () => {
                 {/* secomd section starts */}
                 <div className="d-flex flex-column flex-wrap">
                   <div className="d-flex flex-row py-3 ">
-                    <button className="booked_bookings_button px-3 my-2 me-2">
+                    <button
+                      type="button"
+                      className={
+                        toggleState === 1
+                          ? "booked_bookings_button px-3 my-2 me-2"
+                          : "unactive-tabs px-3 my-2 me-2"
+                      }
+                      onClick={() => toggleTab(1)}
+                    >
+                      Bookings
+                    </button>
+                    <button
+                      type="button"
+                      className={
+                        toggleState === 2
+                          ? "booked_bookings_button px-3 my-2 me-2"
+                          : "unactive-tabs px-3 my-2 me-2"
+                      }
+                      onClick={() => toggleTab(2)}
+                    >
+                      Other Bookings
+                    </button>
+
+                    {/* <button className="booked_bookings_button  ">
                       Bookings
                     </button>
                     <button className="booked_bookings_button px-3 my-2 me-2">
                       Other Bookings
-                    </button>
+                    </button> */}
                   </div>
 
-                  <div className="dash__section2 p-4">
-                    <CardReview
+                  <div
+                    className={
+                      toggleState === 1
+                        ? "content  active-content dash__section2 p-4"
+                        : "content dash__section2 p-4"
+                    }
+                  >
+                    <CardBooked
+                      location="Hightower"
+                      tags={1000}
+                      bookednum={100}
+                      matchesnum={200}
+                    />
+                  </div>
+                  <div
+                    className={
+                      toggleState === 2
+                        ? "content  active-content dash__section2 p-4"
+                        : "content dash__section2 p-4"
+                    }
+                  >
+                    <div className="py-1 mb-3 border-bottom">
+                      <div className="d-flex flex-row col-xl-5 button_row bg-white">
+                        <button className="booked_button_otherbookings m-2 px-1">
+                          Saved
+                        </button>
+                        <button className="booked_button_otherbookings m-2 px-1">
+                          Booked
+                        </button>
+                        <button className="booked_button_otherbookings m-2 px-1">
+                          Expired
+                        </button>
+                      </div>
+                    </div>
+                    <CardBooked
                       location="Hightower"
                       tags={1000}
                       bookednum={100}

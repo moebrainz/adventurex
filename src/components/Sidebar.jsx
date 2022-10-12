@@ -113,12 +113,17 @@ const Sidebar = () => {
               </label>
             </ListLink2>
             <ListLink3>
-              <li className="admin__list">
-                <span className="pe-3">
-                  <div />
-                </span>
-                Admins
-              </li>
+              <NavLink
+                to="/admins"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <li className="admin__list">
+                  <span className="pe-3">
+                    <div />
+                  </span>
+                  Admins
+                </li>
+              </NavLink>
             </ListLink3>
           </Listings>
         </ListWrapper>

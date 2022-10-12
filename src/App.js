@@ -11,6 +11,13 @@ import EditPackage from "./components/overview-packages/EditPackage";
 import BookedPackagesReview from "./components/booked-packages/BookedPackagesReview";
 import BookedPackageHome from "./components/booked-packages/BookedPackageHome";
 import BookedReviewEach from "./components/booked-packages/BookedReviewEach";
+import ViewBookedTrip from "./components/booked-packages/ViewBookedTrip";
+import Admins from "./pages/Admins";
+import AdminHome from "./components/admin-components/AdminHome";
+import EditAdminProfile from "./components/admin-components/EditAdminProfile";
+
+// import { QueryClientProvider, QueryClient } from "react-query";
+// import { ReactQueryDevtools } from "react-query/devtools";
 // import Input from "./components/Input";
 const appRouter = [
   {
@@ -60,9 +67,32 @@ const appRouter = [
           },
           {
             path: "reviewdetails",
-            element: <BookedReviewEach />,
+            children: [
+              {
+                path: "",
+                element: <BookedReviewEach />,
+              },
+              {
+                path: "booked-details",
+                element: <ViewBookedTrip />,
+              },
+            ],
           },
         ],
+      },
+    ],
+  },
+  {
+    path: "/admins",
+    element: <Admins />,
+    children: [
+      {
+        path: "",
+        element: <AdminHome />,
+      },
+      {
+        path: "edit-profile",
+        element: <EditAdminProfile />,
       },
     ],
   },

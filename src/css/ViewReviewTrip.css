@@ -4,6 +4,34 @@
   height: auto;
 }
 
+.breadcrumb_wrapper {
+  --bs-breadcrumb-divider: ">";
+  text-align: center;
+  display: flex;
+}
+
+.ol_list_breadcrumb {
+  display: flex;
+  align-items: baseline;
+}
+
+.breadcrumb_link {
+  font-weight: 500;
+  font-size: 14px;
+  color: #32325d;
+  text-decoration: none;
+}
+
+.breadcrumb_current {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.breadcrumb_link:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+
 ._icon {
   height: 0.8rem;
   width: 0.8rem;
@@ -68,4 +96,58 @@
   font-size: 14px !important;
   color: #32325d !important;
   margin-right: 20px !important;
+}
+
+/* View book trips starts here */
+.booking_id {
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: capitalize;
+
+  color: #32325d;
+}
+
+.booking_id span {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.booked_title {
+  font-weight: 500;
+  font-size: 14px;
+  color: #32325d;
+}
+.booked_cat {
+  width: 57px;
+  height: 20px;
+  background: #d9d9d9;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 12px;
+  color: #32325d;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+/* .table_header th {
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  color: rgba(50, 50, 93, 0.8) !important;
+} */
+th {
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  color: rgba(50, 50, 93, 0.8) !important;
+}
+
+/* .table_body td {
+  font-weight: 500;
+  font-size: 14px;
+  color: #32325d;
+} */
+td {
+  font-weight: 500;
+  font-size: 14px;
+  color: #32325d;
 }

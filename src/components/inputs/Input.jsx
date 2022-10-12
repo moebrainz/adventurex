@@ -33,7 +33,11 @@ const Input = ({
   height,
   width,
   passEyeClick,
+  onChange,
+  value,
+  ref,
 }) => {
+  const myRef = React.createRef();
   return (
     <>
       <h6>{title}</h6>
@@ -43,7 +47,14 @@ const Input = ({
             <Icon src={icon} style={{ height, width }} />
           </div>
           <div className="col-10">
-            <MyInput placeholder={placeholder} type={type} />
+            <MyInput
+              placeholder={placeholder}
+              type={type}
+              onChange={onChange}
+              value={value}
+              ref={myRef}
+              required
+            />
           </div>
           <div className="col-1 align-items-center">
             <Icon

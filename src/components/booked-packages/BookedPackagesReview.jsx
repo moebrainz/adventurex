@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import search from "../../assets/images/x_search_icon.png";
 import action from "../../assets/images/x_action.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../../css/BookedPackages.css";
 import CardReview from "../card-reviews/CardReview";
@@ -57,12 +57,29 @@ const BookedWrapper = styled.div`
 `;
 
 export default () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="container-fluid">
         <DashContentWrapper>
           <div className="">
-            <p className="_heading">Booked packages </p>
+            <nav className="breadcrumb_wrapper" aria-label="breadcrumb">
+              <ol className="breadcrumb ol_list_breadcrumb">
+                <li className="breadcrumb-item">
+                  <Link to={navigate("/booked")} className="breadcrumb_link">
+                    Booked packages
+                  </Link>{" "}
+                </li>
+                <li
+                  className="breadcrumb-item active breadcrumb_current"
+                  aria-current="page"
+                >
+                  Review
+                </li>
+              </ol>
+            </nav>
+            {/* <p className="_heading">Booked packages </p> */}
           </div>
 
           <div className="dash__section2 container-fluid px-1">

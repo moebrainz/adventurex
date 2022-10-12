@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import notifications from "../assets/dashboard/x_notifications_icon.png";
 import avatar from "../assets/dashboard/x_avatar.png";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "../css/Navbar.css";
 
@@ -18,6 +19,9 @@ const NavContainer = styled.div`
 `;
 
 const Navbar = ({ title }) => {
+  const logout = useNavigate();
+  const location = useLocation();
+
   return (
     <>
       <NavContainer>
@@ -60,9 +64,13 @@ const Navbar = ({ title }) => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link
+                      onClick={() => logout(-1)}
+                      replace
+                      className="dropdown-item"
+                    >
                       Logout{" "}
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

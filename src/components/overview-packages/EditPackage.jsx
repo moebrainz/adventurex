@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 // import download from "../assets/images/x_download_icon.png";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../../css/EditPackage.css";
 import Button from "../buttons/Button";
@@ -41,6 +42,8 @@ const EditWrapper = styled.div`
 `;
 
 export default () => {
+  const navigate = useNavigate();
+
   let [inputData, setInputData] = useState("");
   let [pilldisplay, setPilldisplay] = useState([]);
 
@@ -86,12 +89,24 @@ export default () => {
     <>
       <div className="container-fluid">
         <DashContentWrapper>
-          <div className="">
-            <p className="_heading">{`Overview > Hiking & Walking`} </p>
+          <div className="row">
+            <nav className="breadcrumb_wrapper" aria-label="breadcrumb">
+              <ol className="breadcrumb ol_list_breadcrumb">
+                <li className="breadcrumb-item">
+                  <Link to={navigate("/overview")} className="breadcrumb_link">
+                    Overview
+                  </Link>{" "}
+                </li>
+                <li
+                  className="breadcrumb-item active breadcrumb_current"
+                  aria-current="page"
+                >{`Hiking & Walking`}</li>
+              </ol>
+            </nav>
           </div>
           <div className="dash__section2 container-fluid px-0">
             <EditWrapper className="container-fluid">
-              <div className="container bg-white p-5 border-round form_wrapper">
+              <div className="container bg-white p-5 border-round form_wrapper m-0">
                 <div className="row g-5">
                   {/* left section */}
                   <div className="col-md-6 border-right">
