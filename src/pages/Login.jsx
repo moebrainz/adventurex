@@ -71,9 +71,10 @@ const Login = () => {
       //console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.data?.token;
       const roles = response?.data?.data?.admin?.role;
+      const username = response?.data?.data?.admin?.username;
 
       // const message = response?.data?.message;
-      setAuth({ getEmail, getPwd, roles, accessToken });
+      setAuth({ getEmail, getPwd, username, roles, accessToken });
 
       setGetEmail("");
       setGetPwd("");

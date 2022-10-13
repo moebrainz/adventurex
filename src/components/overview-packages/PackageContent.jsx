@@ -68,12 +68,12 @@ export default () => {
                   aria-labelledby="dropdownMenuButton1"
                 >
                   <li>
-                    <a className="dropdown-item" href="">
+                    <a className="dropdown-item" href="#">
                       Live
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="">
+                    <a className="dropdown-item" href="#">
                       Draft
                     </a>
                   </li>

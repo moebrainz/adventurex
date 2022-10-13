@@ -54,22 +54,22 @@ const DashboardContent = () => {
                   aria-labelledby="dropdownMenuButton1"
                 >
                   <li>
-                    <a className="dropdown-item" href="">
+                    <a className="dropdown-item" href="#">
                       Daily
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="">
+                    <a className="dropdown-item" href="#">
                       Monthly
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="">
+                    <a className="dropdown-item" href="#">
                       Weekly
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="">
+                    <a className="dropdown-item" href="#">
                       Annually
                     </a>
                   </li>

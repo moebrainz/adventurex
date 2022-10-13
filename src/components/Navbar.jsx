@@ -3,6 +3,7 @@ import styled from "styled-components";
 import notifications from "../assets/dashboard/x_notifications_icon.png";
 import avatar from "../assets/dashboard/x_avatar.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import useLogin from "../components/hooks/useLogin";
 
 import "../css/Navbar.css";
 
@@ -19,9 +20,20 @@ const NavContainer = styled.div`
 `;
 
 const Navbar = ({ title }) => {
-  const logout = useNavigate();
+  const { auth } = useLogin();
+
+  const navigate = useNavigate();
   const location = useLocation();
 
+  const [logged, setLogged] = React.useState("");
+
+  const handleLogout = () => {
+    setLogged(auth.accessToken);
+    if (logged === logged.length(20)) {
+      setLogged("");
+      navigate("login");
+    }
+  };
   return (
     <>
       <NavContainer>
@@ -53,7 +65,7 @@ const Navbar = ({ title }) => {
                 >
                   <li>
                     <img src={avatar} />
-                    <p className="pt-2">Jonathan Doe</p>
+                    <p className="pt-2">{auth.username}</p>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
@@ -65,7 +77,7 @@ const Navbar = ({ title }) => {
                   </li>
                   <li>
                     <Link
-                      onClick={() => logout(-1)}
+                      onClick={() => handleLogout()}
                       replace
                       className="dropdown-item"
                     >

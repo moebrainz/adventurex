@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Login from "./pages/Login";
-import { Routes, Route, useRoutes } from "react-router-dom";
+import { Routes, Route, useRoutes, useNavigate } from "react-router-dom";
 import AdminDashboard from "./pages/AdminDashboard";
 import OverviewPackages from "./pages/OverviewPackages";
 import BookedPackages from "./pages/BookedPackages";
@@ -15,6 +15,7 @@ import ViewBookedTrip from "./components/booked-packages/ViewBookedTrip";
 import Admins from "./pages/Admins";
 import AdminHome from "./components/admin-components/AdminHome";
 import EditAdminProfile from "./components/admin-components/EditAdminProfile";
+import useLogin from "./components/hooks/useLogin";
 
 // import { QueryClientProvider, QueryClient } from "react-query";
 // import { ReactQueryDevtools } from "react-query/devtools";
@@ -100,6 +101,14 @@ const appRouter = [
 
 function App() {
   let appRoute = useRoutes(appRouter);
+  React.useEffect(() => {
+    if (!auth.accessToken) {
+      navigate("/login");
+    }
+  }, []);
+
+  const navigate = useNavigate();
+  const { auth } = useLogin();
 
   return <React.Fragment>{appRoute}</React.Fragment>;
 }
