@@ -257,67 +257,67 @@ export default () => {
           </div>
           <div className="dash__section2 container-fluid px-0">
             <EditWrapper className="container-fluid">
-              {loading ? (
+              {/* {loading ? (
                 <div className="spinner_wrapper">
                   <Spinner thickness="4px" size="lg" color="#0fa05a" />
                 </div>
-              ) : (
-                <div className="container bg-white p-5 border-round form_wrapper m-0">
-                  <form onSubmit={handleAddPackage}>
-                    <div className="row g-5">
-                      {/* left section */}
-                      <div className="col-md-6 border-right">
-                        <label htmlFor="nameofpackage" className="form-label">
-                          Name of Package
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control mb-4"
-                          placeholder="Name of Package"
-                          // aria-label="Name of package"
-                          id="nameofpackage"
-                          name="packageName"
-                          value={packageName}
-                          onChange={(e) => setPackageName(e.target.value)}
-                          // required
-                        />
-                        <label
-                          htmlFor="expiringdate"
-                          className="form-label"
-                        >{`Expiring date (optional)`}</label>
-                        <input
-                          type="date"
-                          className="form-control mb-4"
-                          // aria-label="Exoiring date"
-                          id="expiringdate"
-                          name="expiringDate"
-                          value={expiringDate}
-                          onChange={(e) => setExpiringDate(e.target.value)}
-                        />
+              ) : ( */}
+              <div className="container bg-white p-5 border-round form_wrapper m-0">
+                <form onSubmit={handleAddPackage}>
+                  <div className="row g-5">
+                    {/* left section */}
+                    <div className="col-md-6 border-right">
+                      <label htmlFor="nameofpackage" className="form-label">
+                        Name of Package
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control mb-4"
+                        placeholder="Name of Package"
+                        // aria-label="Name of package"
+                        id="nameofpackage"
+                        name="packageName"
+                        value={packageName}
+                        onChange={(e) => setPackageName(e.target.value)}
+                        // required
+                      />
+                      <label
+                        htmlFor="expiringdate"
+                        className="form-label"
+                      >{`Expiring date (optional)`}</label>
+                      <input
+                        type="date"
+                        className="form-control mb-4"
+                        // aria-label="Exoiring date"
+                        id="expiringdate"
+                        name="expiringDate"
+                        value={expiringDate}
+                        onChange={(e) => setExpiringDate(e.target.value)}
+                      />
 
-                        <label htmlFor="itinerary" className="form-label">
-                          Itinerary
-                        </label>
-                        <textarea
-                          type="text"
-                          className="form-control mb-4"
-                          placeholder="Itinerary"
-                          aria-label="Itinerary"
-                          id="nameofpackage"
-                          name="itinery"
-                          value={itinery}
-                          onChange={(e) => seItitinery(e.target.value)}
-                        />
-                        <InputFIle
-                          title="Thumbnail"
-                          onChange={(e) => setThumbnail(e)}
-                        />
-                        <InputFIle
-                          title="Banner"
-                          onChange={(e) => setBannerthumbnail(e)}
-                        />
+                      <label htmlFor="itinerary" className="form-label">
+                        Itinerary
+                      </label>
+                      <textarea
+                        type="text"
+                        className="form-control mb-4"
+                        placeholder="Itinerary"
+                        aria-label="Itinerary"
+                        id="nameofpackage"
+                        name="itinery"
+                        value={itinery}
+                        onChange={(e) => seItitinery(e.target.value)}
+                      />
+                      <InputFIle
+                        title="Thumbnail"
+                        onChange={(e) => setThumbnail(e)}
+                      />
+                      <InputFIle
+                        title="Banner"
+                        onChange={(e) => setBannerthumbnail(e)}
+                      />
 
-                        {/* <InputThumbnail
+                      {/* <InputThumbnail
                         title="Thumbnail"
                         thumbvalue={thumbnail}
                         onChange={(e) => setThumbnail(e)}
@@ -328,240 +328,240 @@ export default () => {
                         onChange={(e) => setBannerthumbnail(e)}
                       /> */}
 
-                        <label htmlFor="priceperperson" className="form-label">
-                          Price per Person
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control mb-4"
-                          placeholder="Price per person"
-                          aria-label="Price per person"
-                          id="priceperperson"
-                          name="price"
-                          value={price}
-                          onChange={(e) => setPrice(e.target.value)}
-                        />
-                        <label htmlFor="tripcode" className="form-label">
-                          Trip code
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control mb-4"
-                          placeholder="Trip code"
-                          aria-label="Trip code"
-                          id="tripcode"
-                          name="tripCode"
-                          value={tripCode}
-                          onChange={(e) => setTripCode(e.target.value)}
-                        />
-                      </div>
-                      {/* left section end*/}
+                      <label htmlFor="priceperperson" className="form-label">
+                        Price per Person
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control mb-4"
+                        placeholder="Price per person"
+                        aria-label="Price per person"
+                        id="priceperperson"
+                        name="price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                      />
+                      <label htmlFor="tripcode" className="form-label">
+                        Trip code
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control mb-4"
+                        placeholder="Trip code"
+                        aria-label="Trip code"
+                        id="tripcode"
+                        name="tripCode"
+                        value={tripCode}
+                        onChange={(e) => setTripCode(e.target.value)}
+                      />
+                    </div>
+                    {/* left section end*/}
 
-                      {/* right section */}
-                      <div className="col-md-6">
-                        <label htmlFor="travelstyle" className="form-label">
-                          Travel Style
-                        </label>
-                        <div className="select_wrapper">
-                          <select
-                            className=" form-select mb-4"
-                            name="travelStyle"
-                            aria-label="Travel Style"
-                            id="travelstyle"
-                            value={travelStyle}
-                            onChange={(e) => setTravelStyle(e.target.value)}
-                          >
-                            <option value="self_guided">Self Guided</option>
-                            <option value="small_group">{`Small Group < 12`}</option>
-                            <option value="large_group">{`Large Group 20 >`}</option>
-                          </select>
-                        </div>
-
-                        <label htmlFor="tripcode" className="form-label">
-                          Travel Duration
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control mb-4"
-                          placeholder="Travel Duration"
-                          aria-label="Trip code"
-                          id="tripcode"
-                          name="tripCode"
-                          value={travelDuration}
-                          onChange={(e) => setTravelDuration(e.target.value)}
-                        />
-
-                        <label htmlFor="expiringdate" className="form-label">
-                          Age range
-                        </label>
-                        <div className="select_wrapper">
-                          <select
-                            className=" form-select mb-4"
-                            name="ageRange"
-                            id="agerange"
-                            value={ageRange}
-                            onChange={(e) => setAgeRange(e.target.value)}
-                          >
-                            <option value="5-9">5-9</option>
-                            <option value="10-15">10-15</option>
-                            <option value="16-20">16-20</option>
-                            <option value="20-30">20-30</option>
-                            <option value="50 and above">50 and above</option>
-                          </select>
-                        </div>
-
-                        <label
-                          htmlFor="accomodationlodging"
-                          className="form-label"
+                    {/* right section */}
+                    <div className="col-md-6">
+                      <label htmlFor="travelstyle" className="form-label">
+                        Travel Style
+                      </label>
+                      <div className="select_wrapper">
+                        <select
+                          className=" form-select mb-4"
+                          name="travelStyle"
+                          aria-label="Travel Style"
+                          id="travelstyle"
+                          value={travelStyle}
+                          onChange={(e) => setTravelStyle(e.target.value)}
                         >
-                          Accomodation/Lodging
-                        </label>
-                        <div className="select_wrapper mb-4">
-                          <select
-                            className=" form-select"
-                            name="accomodationLodging "
-                            id="accomodationlodging"
-                            value={accomodationLodging}
-                            onChange={(e) =>
-                              setAccomodationLodging(e.target.value)
-                            }
-                          >
-                            <option value="2 star">2 star</option>
-                            <option value="3 star">3 star</option>
-                            <option value="4 star">4 star</option>
-                            <option value="5 star">5 star</option>
-                          </select>
-                        </div>
+                          <option value="self_guided">Self Guided</option>
+                          <option value="small_group">{`Small Group < 12`}</option>
+                          <option value="large_group">{`Large Group 20 >`}</option>
+                        </select>
+                      </div>
 
-                        <label htmlFor="priceperperson" className="form-label">
-                          Activities
-                        </label>
-                        <div className="mb-4">
-                          <div className="pill_display p-3 mb-1">
-                            {pilldisplay.map((pill) => (
-                              <button
-                                className="pill_button_display pe-2"
-                                key={pill.id}
+                      <label htmlFor="tripcode" className="form-label">
+                        Travel Duration
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control mb-4"
+                        placeholder="Travel Duration"
+                        aria-label="Trip code"
+                        id="tripcode"
+                        name="tripCode"
+                        value={travelDuration}
+                        onChange={(e) => setTravelDuration(e.target.value)}
+                      />
+
+                      <label htmlFor="expiringdate" className="form-label">
+                        Age range
+                      </label>
+                      <div className="select_wrapper">
+                        <select
+                          className=" form-select mb-4"
+                          name="ageRange"
+                          id="agerange"
+                          value={ageRange}
+                          onChange={(e) => setAgeRange(e.target.value)}
+                        >
+                          <option value="5-9">5-9</option>
+                          <option value="10-15">10-15</option>
+                          <option value="16-20">16-20</option>
+                          <option value="20-30">20-30</option>
+                          <option value="50 and above">50 and above</option>
+                        </select>
+                      </div>
+
+                      <label
+                        htmlFor="accomodationlodging"
+                        className="form-label"
+                      >
+                        Accomodation/Lodging
+                      </label>
+                      <div className="select_wrapper mb-4">
+                        <select
+                          className=" form-select"
+                          name="accomodationLodging "
+                          id="accomodationlodging"
+                          value={accomodationLodging}
+                          onChange={(e) =>
+                            setAccomodationLodging(e.target.value)
+                          }
+                        >
+                          <option value="2 star">2 star</option>
+                          <option value="3 star">3 star</option>
+                          <option value="4 star">4 star</option>
+                          <option value="5 star">5 star</option>
+                        </select>
+                      </div>
+
+                      <label htmlFor="priceperperson" className="form-label">
+                        Activities
+                      </label>
+                      <div className="mb-4">
+                        <div className="pill_display p-3 mb-1">
+                          {pilldisplay.map((pill) => (
+                            <button
+                              className="pill_button_display pe-2"
+                              key={pill.id}
+                            >
+                              {pill.value}
+
+                              <span
+                                className="pill_button_cancel"
+                                removePills={pill.value}
+                                onClick={removePillHandler}
                               >
-                                {pill.value}
-
-                                <span
-                                  className="pill_button_cancel"
-                                  removePills={pill.value}
-                                  onClick={removePillHandler}
-                                >
-                                  {" "}
-                                  | X
-                                </span>
-                              </button>
-                            ))}
-                            {/* <button className="pill_button_display pe-2">
+                                {" "}
+                                | X
+                              </span>
+                            </button>
+                          ))}
+                          {/* <button className="pill_button_display pe-2">
                               Biking{" "}
                               <span className="pill_button_cancel"> | X</span>
                             </button> */}
-                          </div>
-
-                          <div className="pill_display_s2 p-1">
-                            <input
-                              type=""
-                              className="form-control me-2 border-0"
-                              placeholder="Type activities..."
-                              aria-label="Type activities"
-                              id="activities"
-                              value={inputData}
-                              onChange={(e) =>
-                                setInputData(e.target.value.trim())
-                              }
-                              // pilldisplay.activities = e.target.value;
-                              name="activities"
-                            />
-                            <button className="pill_button" onClick={addPill}>
-                              {" "}
-                              Add
-                            </button>
-                          </div>
                         </div>
 
-                        <label htmlFor="priceperperson" className="form-label">
-                          What's included
-                        </label>
-                        <div className="mb-4">
-                          <div className="pill_display p-3 mb-1">
-                            {pilldisplay2.map((pill) => (
-                              <button
-                                className="pill_button_display"
-                                key={pill.id}
-                              >
-                                {pill.value}
-
-                                <span
-                                  className="pill_button_cancel"
-                                  removePills={pill.value}
-                                  onClick={removePillHandler2}
-                                >
-                                  {" "}
-                                  | X
-                                </span>
-                              </button>
-                            ))}
-                            <button className="pill_button_display pe-2">
-                              Biking{" "}
-                              <span className="pill_button_cancel"> | X</span>
-                            </button>
-                          </div>
-
-                          <div className="pill_display_s2 p-1">
-                            <input
-                              type=""
-                              className="form-control me-2 border-0"
-                              placeholder="Whats included..."
-                              aria-label="What's included"
-                              id="included"
-                              value={inputData2}
-                              onChange={(e) =>
-                                setInputData2(e.target.value.trim())
-                              }
-                              // pilldisplay.activities = e.target.value;
-                              name="included"
-                            />
-                            <button className="pill_button" onClick={addPill2}>
-                              {" "}
-                              Add
-                            </button>
-                          </div>
-                        </div>
-                        <div className="file_inputsm">
-                          <InputFilesm
-                            title={`Cites & Attractions`}
-                            inputname="file"
-                            onChange={(e) => setFile(e)}
+                        <div className="pill_display_s2 p-1">
+                          <input
+                            type=""
+                            className="form-control me-2 border-0"
+                            placeholder="Type activities..."
+                            aria-label="Type activities"
+                            id="activities"
+                            value={inputData}
+                            onChange={(e) =>
+                              setInputData(e.target.value.trim())
+                            }
+                            // pilldisplay.activities = e.target.value;
+                            name="activities"
                           />
-                        </div>
-
-                        <div className="d-flex flex-row flex-wrap">
-                          <div className="pe-3 py-2">
-                            <Button
-                              width={200}
-                              height={45}
-                              content="ADD PACKAGE"
-                              type="submit"
-                            />
-                          </div>
-                          <div className="py-2">
-                            <ButtonWhite
-                              width={150}
-                              height={45}
-                              content="SAVE DRAFT"
-                              type="submit"
-                            />
-                          </div>
+                          <button className="pill_button" onClick={addPill}>
+                            {" "}
+                            Add
+                          </button>
                         </div>
                       </div>
-                      {/* right section ended */}
+
+                      <label htmlFor="priceperperson" className="form-label">
+                        What's included
+                      </label>
+                      <div className="mb-4">
+                        <div className="pill_display p-3 mb-1">
+                          {pilldisplay2.map((pill) => (
+                            <button
+                              className="pill_button_display"
+                              key={pill.id}
+                            >
+                              {pill.value}
+
+                              <span
+                                className="pill_button_cancel"
+                                removePills={pill.value}
+                                onClick={removePillHandler2}
+                              >
+                                {" "}
+                                | X
+                              </span>
+                            </button>
+                          ))}
+                          {/* <button className="pill_button_display pe-2">
+                              Biking{" "}
+                              <span className="pill_button_cancel"> | X</span>
+                            </button> */}
+                        </div>
+
+                        <div className="pill_display_s2 p-1">
+                          <input
+                            type=""
+                            className="form-control me-2 border-0"
+                            placeholder="Whats included..."
+                            aria-label="What's included"
+                            id="included"
+                            value={inputData2}
+                            onChange={(e) =>
+                              setInputData2(e.target.value.trim())
+                            }
+                            // pilldisplay.activities = e.target.value;
+                            name="included"
+                          />
+                          <button className="pill_button" onClick={addPill2}>
+                            {" "}
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                      <div className="file_inputsm">
+                        <InputFilesm
+                          title={`Cites & Attractions`}
+                          inputname="file"
+                          onChange={(e) => setFile(e)}
+                        />
+                      </div>
+
+                      <div className="d-flex flex-row flex-wrap">
+                        <div className="pe-3 py-2">
+                          <Button
+                            width={200}
+                            height={45}
+                            content="ADD PACKAGE"
+                            type="submit"
+                          />
+                        </div>
+                        <div className="py-2">
+                          <ButtonWhite
+                            width={150}
+                            height={45}
+                            content="SAVE DRAFT"
+                            type="submit"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </form>
-                </div>
-              )}
+                    {/* right section ended */}
+                  </div>
+                </form>
+              </div>
+              {/* )} */}
             </EditWrapper>
           </div>
         </DashContentWrapper>
