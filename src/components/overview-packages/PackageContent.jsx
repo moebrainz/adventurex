@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import addpackage from "../../assets/dashboard/x_addpackage.png";
 import deleted from "../../assets/dashboard/x_delete_icon.png";
+import postaxios from "../../api/postaxios";
+import useLogin from "../hooks/useLogin";
 
 import "../../css/PackageContent.css";
 import CardOverview from "../card-reviews/CardOverview";
+
+const VIEW_URL = "/list-package";
 
 const DashContentWrapper = styled.div`
   display: flex;
@@ -26,6 +30,21 @@ const CardWrapper = styled.div`
   overflow: hidden;
 `;
 export default () => {
+  const [listData, setListData] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  //calling global state
+  const { listPackages, setListPackages } = useLogin();
+
+  React.useEffect(() => {
+    postaxios.get(VIEW_URL).then((res) => {
+      setListData(res?.data?.data);
+      setListPackages(res?.data?.data);
+      console.log(listPackages, "from listing");
+    });
+  }, []);
+  // console.log(listData, "from list data");
+
   return (
     <>
       <div className="container-fluid">
@@ -59,7 +78,9 @@ export default () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <button className="border-0 bg-white ">Live</button>
+                  <button className="border-0 bg-white " value="live">
+                    Live
+                  </button>
                   <span className="dropdown-toggle"></span>
                 </div>
 
@@ -81,12 +102,20 @@ export default () => {
               </div>
             </ActionWrapper>
             <CardWrapper>
-              <CardOverview
-                location="Hightower"
-                tags={1000}
-                bookednum={100}
-                matchesnum={200}
-              />
+              <div className=" d-flex flex-row flex-wrap gap-3">
+                {listPackages.map((e) => (
+                  // console.log(e)
+                  <CardOverview
+                    record_id={e._id}
+                    banner={e.thumbnail}
+                    key={e._id}
+                    location={e.package_name}
+                    tags={1000}
+                    bookednum={100}
+                    matchesnum={200}
+                  />
+                ))}
+              </div>
             </CardWrapper>
           </div>
         </DashContentWrapper>

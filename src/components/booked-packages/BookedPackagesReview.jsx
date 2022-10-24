@@ -1,11 +1,33 @@
 import React, { useState } from "react";
+import BookedTime from "moment";
+
 import styled from "styled-components";
 import search from "../../assets/images/x_search_icon.png";
 import action from "../../assets/images/x_action.png";
 import { Link, useNavigate } from "react-router-dom";
+import mockData from "../../data/AminData";
 
 import "../../css/BookedPackages.css";
-import CardReview from "../card-reviews/CardReview";
+
+const BookedTable = ({ data }) => (
+  <tr>
+    <td>{data?.firstname}</td>
+    <td>{data?.lastname}</td>
+    <td>{data?.email_address}</td>
+    <td>
+      {BookedTime(data?.start_date).format("MM/DD/YY")} -{" "}
+      {BookedTime(data?.end_date).format("MM/DD/YY")}
+    </td>
+    <td>{data?.booking_no}</td>
+    <td>
+      <Link to="reviewdetails">
+        <div className="action">
+          <img src={action} />
+        </div>
+      </Link>
+    </td>
+  </tr>
+);
 
 const DashContentWrapper = styled.div`
   display: flex;
@@ -127,48 +149,9 @@ export default () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Harry</td>
-                        <td>Maguire</td>
-                        <td>harry@gmail.com</td>
-                        <td>07/21/22 - 07/21/22</td>
-                        <td>32323232</td>
-                        <td>
-                          <Link to="reviewdetails">
-                            <div className="action">
-                              <img src={action} />
-                            </div>
-                          </Link>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Jonny</td>
-                        <td>Deep</td>
-                        <td>jonny@gmail.com</td>
-                        <td>07/21/22 - 07/21/22</td>
-                        <td>32323232</td>
-                        <td>
-                          <Link to="reviewdetails">
-                            <div className="action">
-                              <img src={action} />
-                            </div>
-                          </Link>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Luke</td>
-                        <td>Sky-Walker</td>
-                        <td>luke@gmail.com</td>
-                        <td>07/21/22 - 07/21/22</td>
-                        <td>32323232</td>
-                        <td>
-                          <Link to="reviewdetails">
-                            <div className="action">
-                              <img src={action} />
-                            </div>
-                          </Link>
-                        </td>
-                      </tr>
+                      {mockData.bookingData.map((bkdata, i) => (
+                        <BookedTable data={bkdata} key={i} />
+                      ))}
                     </tbody>
                   </table>
                 </div>

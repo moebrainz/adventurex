@@ -45,6 +45,8 @@ const ListLink1 = styled.a`
 const ListLink2 = styled.a`
   text-decoration: none;
   color: #32325d;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     color: #32325d;
@@ -85,8 +87,9 @@ const Sidebar = () => {
                     <div className="pack__icon" />
                   </span>
                   Packages
-                  <span className="dropdown-toggle ms-5 ps-5"></span>
+                  <span className="dropdown-toggle"></span>
                 </li>
+
                 <input type="checkbox" id="touch" />
                 <ul className="slide">
                   <NavLink

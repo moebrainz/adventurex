@@ -24,7 +24,7 @@
 }
 
 .thumbnail {
-  width: 430px;
+  max-width: 430px;
   height: 97px;
   position: relative;
   border: 0.3px dashed rgba(50, 50, 93, 0.3);
@@ -164,4 +164,8 @@
   width: 100%;
   height: auto;
   vertical-align: inherit;
+}
+
+.thumb_wrapper {
+  width: 100%;
 }

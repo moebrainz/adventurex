@@ -42,7 +42,7 @@ const appRouter = [
         element: <PackageContent />,
       },
       {
-        path: "viewtrip",
+        path: "viewtrip/:id",
         element: <ViewTrip />,
       },
       {
@@ -101,11 +101,11 @@ const appRouter = [
 
 function App() {
   let appRoute = useRoutes(appRouter);
-  React.useEffect(() => {
-    if (!auth.accessToken) {
-      navigate("/login");
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (!auth.accessToken) {
+  //     navigate("/login");
+  //   }
+  // }, []);
 
   const navigate = useNavigate();
   const { auth } = useLogin();

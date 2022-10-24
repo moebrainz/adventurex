@@ -1,8 +1,5 @@
-import { render } from "@testing-library/react";
-import React, { useState } from "react";
-import { FileUploader } from "react-drag-drop-files";
-
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 import download from "../../assets/images/x_download_icon.png";
 
 import "../../css/InputFile.css";
@@ -12,6 +9,7 @@ const FileWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 
   input {
     opacity: 0;
@@ -20,6 +18,7 @@ const FileWrapper = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 10;
     cursor: pointer;
   }
 
@@ -42,26 +41,44 @@ const FileContainer = styled.div`
   div {
   }
 `;
-const fileTypes = ["JPEG", "PNG", "GIF"];
 
-const InputFIle = ({ title, onChange }) => {
+const InputWrapper = styled.input``;
+const imageMimeType = /image\/(png|jpg|jpeg)/i;
+
+function TestInput({ title }) {
   const [file, setFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState("");
-  const handleChange = (file) => {
-    //check that the img exist
-    if (!file || file.length === 0) return;
-    setFile(file[0]);
-    setPreviewUrl(URL.createObjectURL(file[0]));
-    onChange(file[0]);
-  };
+  const [fileDataURL, setFileDataURL] = useState(null);
 
-  // const reader = new FileReader();
-  // reader.onloadend = (e) => {
-  //   previewUrl = e.target.result;
-  // };
-  // reader.readAsDataURL(previewUrl);
-  //   Z
-  console.log(previewUrl);
+  const changeHandler = (e) => {
+    const file = e.target.files[0];
+    if (!file.type.match(imageMimeType)) {
+      alert("Image mime type is not valid");
+      return;
+    }
+    setFile(file);
+  };
+  useEffect(() => {
+    let fileReader,
+      isCancel = false;
+    if (file) {
+      fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const { result } = e.target;
+        if (result && !isCancel) {
+          setFileDataURL(result);
+        }
+      };
+      fileReader.readAsDataURL(file);
+    }
+    return () => {
+      isCancel = true;
+      if (fileReader && fileReader.readyState === 1) {
+        fileReader.abort();
+      }
+    };
+  }, [file]);
+
+  console.log(fileDataURL);
 
   const imageUploader = () => {
     return (
@@ -81,9 +98,9 @@ const InputFIle = ({ title, onChange }) => {
     return (
       <>
         <div className="thumbnail">
-          <img src={previewUrl} />
+          <img src={fileDataURL} />
 
-          <button className="edit_thumbnail" onClick={() => handleChange()}>
+          <button className="edit_thumbnail" onClick={() => changeHandler()}>
             {" "}
             Edit
           </button>
@@ -96,24 +113,20 @@ const InputFIle = ({ title, onChange }) => {
     <>
       <FileWrapper className="mb-4">
         <Label>{title}</Label>
-        <FileUploader
-          multiple={true}
-          handleChange={handleChange}
-          name="file"
-          types={fileTypes}
-          children={
-            <FileContainer className="">
-              <div className="thumb_wrapper">
-                {!previewUrl ? imageUploader() : imagePreview()}
-              </div>
-            </FileContainer>
-          }
-        />
+        <FileContainer className="">
+          <InputWrapper
+            type="file"
+            id="image"
+            accept=".png, .jpg, .jpeg"
+            onChange={changeHandler}
+          />
 
-        {/* <p>{file ? `File name: ${file[0].name}` : "no files uploaded yet"}</p> */}
+          <div className="">
+            {!fileDataURL ? imageUploader() : imagePreview()}
+          </div>
+        </FileContainer>
       </FileWrapper>
     </>
   );
-};
-
-export default InputFIle;
+}
+export default TestInput;

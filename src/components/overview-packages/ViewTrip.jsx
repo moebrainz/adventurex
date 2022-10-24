@@ -1,10 +1,11 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import editicon from "../../assets/images/x_editicon.png";
 import viewbig from "../../assets/images/x_viewtrip_img.png";
 import viewsm1 from "../../assets/images/x_viewtrip_sm1.png";
 import viewsm2 from "../../assets/images/x_viewtrip_sm2.png";
+import useLogin from "../hooks/useLogin";
 
 import "../../css/ViewReviewTrip.css";
 
@@ -22,6 +23,25 @@ const CardWrapper = styled.div`
 `;
 export default () => {
   const navigate = useNavigate();
+  let params = useParams();
+  const [getviewList, setGetViewList] = React.useState("");
+
+  const { listPackages } = useLogin();
+
+  React.useEffect(() => {
+    const viewPackages = listPackages.findIndex((i) => i._id === params.id);
+    let viewList = listPackages[viewPackages];
+    setGetViewList(viewList);
+    // return () => viewList;
+  }, []);
+
+  // let included = getviewList.included;
+  // const style = tStyle.replace("_", " ");
+  // console.log(included, "from included");
+  // console.log(style, "from travel style");
+  // console.log(getviewList, "corresponding data to the package number");
+
+  // console.log(params, "from params");
   return (
     <>
       <div className="container-fluid">
@@ -30,7 +50,7 @@ export default () => {
             <nav className="breadcrumb_wrapper" aria-label="breadcrumb">
               <ol className="breadcrumb ol_list_breadcrumb">
                 <li className="breadcrumb-item">
-                  <Link to={navigate("/overview")} className="breadcrumb_link">
+                  <Link to="/overview" className="breadcrumb_link">
                     Overview
                   </Link>{" "}
                 </li>
@@ -47,7 +67,7 @@ export default () => {
               <div className=" row">
                 <div className=" col-xl-8">
                   <div className="view_bigimg">
-                    <img src={viewbig} alt="" />
+                    <img src={getviewList.thumbnail} alt="" />
                   </div>
                 </div>
                 <div className="d-flex flex-row flex-wrap col-xl-4">
@@ -82,10 +102,13 @@ export default () => {
               <div className="row align-items-baseline">
                 <div className="col-xl-8">
                   <span className="d-flex flex-row pt-4 pb-3 align-items-center">
-                    <h5 className="pe-3 mb-0 _heading">{`Hiking & Walking`}</h5>{" "}
-                    <div>
+                    <h5 className="pe-3 mb-0 _heading">
+                      {getviewList.package_name}
+                    </h5>{" "}
+                    {/* {`Hiking & Walking`} */}
+                    {/* <div>
                       <img src={editicon} alt="" className="edit_icon" />
-                    </div>
+                    </div> */}
                   </span>
 
                   <p className="_subheading">{`Lorem ipsum dolor sit amet, consectetur adipiscing elit. At id amet non, id tincidunt. Fames in diam sit quis eget consectetur pretium augue. Sed donec aliquam amet fermentum sem. Egestas justo, accumsan tortor suspendisse. Vitae purus molestie diam lacus scelerisque. Accumsan orci nibh ullamcorper hac venenatis gravida ut aliquam. Rhoncus, morbi tortor leo diam. Sed maecenas nisl pretium at nunc aliquet. Ac lectus.`}</p>
@@ -103,7 +126,9 @@ export default () => {
                       </div>
                       <div className="col">
                         <p className="_heading_leftsection mb-1">Age Range</p>
-                        <p className="_subheading_leftsection">14 - 25 years</p>
+                        <p className="_subheading_leftsection">
+                          {`${getviewList.age_range} years`}{" "}
+                        </p>
                       </div>
                       <div className="col">
                         <p className="_heading_leftsection mb-1">Trip Price</p>
@@ -116,13 +141,15 @@ export default () => {
                         <p className="_heading_leftsection mb-1">
                           Travel Style
                         </p>
-                        <p className="_subheading_leftsection">Small group</p>
+                        <p className="_subheading_leftsection">
+                          {getviewList.travel_style?.replace("_", " ")}
+                        </p>
                       </div>
                       <div className="col">
                         <p className="_heading_leftsection mb-1">
                           Price Per Person
                         </p>
-                        <p className="_subheading_leftsection">$25</p>
+                        <p className="_subheading_leftsection">{`$${getviewList.price_per_person}`}</p>
                       </div>
                       <div className="col">
                         <p className="_heading_leftsection mb-1">
@@ -138,29 +165,35 @@ export default () => {
                 <div className="col-xl-8">
                   <h5 className="_heading">Other Activities</h5>
                   <div className="d-flex flex-row flex-wrap">
-                    <div className="badge rounded-pill pill ">
-                      <p className=" p-2 mb-0">Bikings</p>
-                    </div>
-                    <div className="badge rounded-pill pill ">
-                      <p className=" p-2  mb-0">Snow Boarding</p>
-                    </div>
-                    <div className="badge rounded-pill pill ">
-                      <p className=" p-2  mb-0">Cooking</p>
-                    </div>
+                    {getviewList.activities?.map((list, i) => {
+                      let a_list = JSON.parse(list);
+                      console.log(a_list, "this list");
+                      return a_list.map((e) => (
+                        <div
+                          className="badge rounded-pill pill my-2 mx-2"
+                          key={i}
+                        >
+                          <p className=" p-2 mb-0">{e?.value}</p>
+                        </div>
+                      ));
+                    })}
                   </div>
                 </div>
                 <div className="col-xl-4 ps-1">
                   <h5 className="_heading">What's included</h5>
                   <div className="d-flex flex-row flex-wrap">
-                    <div className="badge rounded-pill pill my-2">
-                      <p className=" p-2 mb-0">Bikings</p>
-                    </div>
-                    <div className="badge rounded-pill pill my-2 ">
-                      <p className=" p-2  mb-0">Snow Boarding</p>
-                    </div>
-                    <div className="badge rounded-pill pill my-2">
-                      <p className=" p-2  mb-0">Cooking</p>
-                    </div>
+                    {getviewList.included?.map((list) => {
+                      let a_list = JSON.parse(list);
+                      console.log(a_list, "this list");
+                      return a_list.map((e, i) => (
+                        <div
+                          className="badge rounded-pill pill my-2 mx-2"
+                          key={i}
+                        >
+                          <p className=" p-2 mb-0">{e?.value}</p>
+                        </div>
+                      ));
+                    })}
 
                     <div></div>
                   </div>

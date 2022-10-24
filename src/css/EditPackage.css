@@ -98,3 +98,13 @@ input[type="date"] {
 .file_inputsm {
   align-items: center;
 }
+
+.spinner_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 200px;
+  background-color: black;
+  opacity: 0.4;
+  height: 80vh;
+}

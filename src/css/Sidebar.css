@@ -134,6 +134,16 @@
 /* .dropdown_pack:hover .dropdown-content_pack {
   display: block;
 } */
+.p_wrap:hover {
+  background: rgba(3, 70, 38, 0.06);
+  color: #034626;
+  transform: scaleX(1.04);
+}
+.p_wrap::after {
+  content: "";
+  background: rgba(3, 70, 38, 0.06);
+  color: #034626;
+}
 
 .slide {
   clear: both;
@@ -170,4 +180,10 @@
 #touch:checked + .slide {
   height: 90px;
   color: #32325d;
+}
+/* from bootstrap */
+.dropdown-toggle::after {
+  position: absolute;
+  right: 0;
+  margin: 11px;
 }

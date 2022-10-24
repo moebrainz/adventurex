@@ -6,6 +6,7 @@ import completed from "../assets/dashboard/x_ctest.png";
 import uncompleted from "../assets/dashboard/x_uctest.png";
 import savedpackages from "../assets/dashboard/x_saved_packages.png";
 import bookedpackages from "../assets/dashboard/x_booked_packages.png";
+import DashMockData from "../data/DashData";
 
 import "../css/DashboardContent.css";
 import InfoCard from "./card-reviews/InfoCard";
@@ -78,49 +79,15 @@ const DashboardContent = () => {
             </FilterWrapper>
 
             <CardWrapper className="">
-              <div className="row gap-4">
-                <div className="col">
-                  {" "}
-                  <InfoCard
-                    cardicons={signups}
-                    cardcontent="Signups"
-                    cardvalue={75}
-                  />
-                </div>
-                <div className="col">
-                  {" "}
-                  <InfoCard
-                    cardicons={completed}
-                    cardcontent="Completed Test"
-                    cardvalue={50}
-                  />
-                </div>
-                <div className="col">
-                  {" "}
-                  <InfoCard
-                    cardicons={uncompleted}
-                    cardcontent="Uncompleted Test"
-                    cardvalue={24}
-                  />
-                </div>
-                <div className="col">
-                  {" "}
-                  <InfoCard
-                    cardicons={savedpackages}
-                    cardcontent="Saved Packages"
-                    cardvalue={350}
-                  />
-                </div>
-              </div>
-            </CardWrapper>
-            <CardWrapper>
-              <div className="row">
-                <div className="col-3">
-                  <InfoCard
-                    cardicons={bookedpackages}
-                    cardcontent="Booked Packages"
-                    cardvalue={350}
-                  />
+              <div className="gap-4 p-3">
+                <div className="d-flex flex-row flex-wrap gap-5 ">
+                  {DashMockData.DataSummary.map((dashdata) => (
+                    <InfoCard
+                      cardicons={dashdata.cardicons}
+                      cardcontent={dashdata.cardcontent}
+                      cardvalue={dashdata.cardvalue}
+                    />
+                  ))}
                 </div>
               </div>
             </CardWrapper>

@@ -46,24 +46,65 @@ const FileContainer = styled.div`
 `;
 const fileTypes = ["JPEG", "PNG", "GIF"];
 
-const InputFilesm = ({ title }) => {
+const InputFilesm = ({ title, inputname, onChange }) => {
   //state for handling multiple image input
   const [updateImage, setUpdateImage] = React.useState([]);
+  const [editIndex, setEditIndex] = React.useState(null);
+
+  const [file, setFile] = useState(null);
+  const [getFiles, setGetFiles] = useState([]);
+  const [previewUrl, setPreviewUrl] = useState("");
 
   const handleImageUpdate = (file) => {
     if (!file || file.length === 0) return;
     setFile(file[0]);
 
     setUpdateImage([...updateImage, URL.createObjectURL(file[0])]);
+    setGetFiles([...getFiles, file]);
+    setPreviewUrl([URL.createObjectURL(file[0])]);
   };
+  onChange(getFiles);
 
-  const [file, setFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState("");
+  // console.log("from file", file);
+  // console.log("from getFIle", getFiles);
+
+  console.log("from update", updateImage);
+  // console.log("from preview", previewUrl);
+
   const handleChange = (file) => {
     //check that the img exist
     if (!file || file.length === 0) return;
     setFile(file[0]);
-    setPreviewUrl(URL.createObjectURL(file[0]));
+
+    const checkimg = updateImage.map((ckimg) => {
+      file = previewUrl ? previewUrl : ckimg;
+    });
+    console.log(checkimg, "return check");
+    console.log(previewUrl, "showing file");
+
+    // setUpdateImage(checkimg);
+
+    // if (previewUrl) {
+    //   // let imgData = {
+    //   //   // index: new Date().getTime(),
+    //   //   src: previewUrl,
+    //   // };
+    //   let imgData = previewUrl;
+    //   if (editIndex !== null) {
+    //     // console.log(editIndex, "edits");
+    //     // imgData.index = editIndex;
+    //     const imgIndex = updateImage.findIndex((e) => e.index === editIndex);
+
+    //     console.log(imgIndex, "number returned");
+    //     updateImage.splice(imgIndex, 1, imgData);
+    //     setUpdateImage([...updateImage, URL.createObjectURL(file[0])]);
+    //     // setPreviewUrl([URL.createObjectURL(file[0]), imgData]);
+    //   } else {
+    //     setPreviewUrl(URL.createObjectURL(file[0]));
+    //     // setUpdateImage([...updateImage, URL.createObjectURL(file[0]), imgData]);
+    //     // console.log(updateImage, "this");
+    //   }
+    // }
   };
 
   const imageUploader = () => {
@@ -79,13 +120,13 @@ const InputFilesm = ({ title }) => {
     );
   };
 
-  const imagePreview = (imgSrc) => {
+  const imagePreview = (imgSrc, index) => {
     return (
       <>
         <FileUploader
           multiple={true}
-          handleChange={handleChange}
-          name="file"
+          handleChange={() => handleChange(index)}
+          name={inputname}
           types={fileTypes}
           children={
             <div className="thumbnailsm">
@@ -93,7 +134,10 @@ const InputFilesm = ({ title }) => {
 
               <button
                 className="edit_thumbnailsm"
-                onClick={() => handleChange()}
+                onClick={() => {
+                  setEditIndex(index);
+                  handleChange(index);
+                }}
               >
                 {" "}
                 Edit
@@ -116,8 +160,8 @@ const InputFilesm = ({ title }) => {
                 <FileContainer className="p-3">
                   <div className="" key={index}>
                     {/* {pill.value} */}
-                    {console.log(item, "njcjk")}
-                    {!item ? imageUploader() : imagePreview(item)}
+                    {/* {console.log(item, "njcjk")} */}
+                    {!item ? imageUploader() : imagePreview(item, index)}
                   </div>
                 </FileContainer>
 

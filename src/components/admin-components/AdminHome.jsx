@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import TimeMoment from "moment";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import addpackage from "../../assets/dashboard/x_addpackage.png";
@@ -12,6 +13,8 @@ import "../../css/AdminHome.css";
 import ResetModal from "../modals/ResetModal";
 import TransferModal from "../modals/TransferModal";
 import AddAdminModal from "../modals/AddAdminModal";
+
+import mockData from "../../data/AminData";
 
 const DashContentWrapper = styled.div`
   display: flex;
@@ -31,6 +34,33 @@ const TableWrapper = styled.div`
   flex-direction: row;
   overflow: hidden;
 `;
+
+const TableRow = ({ data, ref }) => (
+  <tr>
+    <td>
+      <input type="checkbox" ref={ref} />
+    </td>
+    <td>
+      <div className="action">
+        <img src={data?.img} alt="" />
+      </div>
+    </td>
+    <td>{data?.username}</td>
+    <td>{data?.firstname}</td>
+    <td>{data?.lastname}</td>
+    <td>{data?.email_address}</td>
+    <td>{TimeMoment(data?.last_active).startOf("hour").fromNow()}</td>
+    <td>{data?.role}</td>
+    <td>
+      <Link to="edit-profile">
+        <div className="action">
+          <img src={action} alt="" />
+        </div>
+      </Link>
+    </td>
+  </tr>
+);
+
 export default () => {
   //state for smModal
   const [smShow, setSmShow] = useState(false);
@@ -41,6 +71,13 @@ export default () => {
   const handleTransferClose = () => setTransfer(true);
   const handleTransfer = () => setTransfer(false);
   const handleAddAdmin = () => setAddAdmin(false);
+
+  const checkInput = useRef();
+
+  //states for deleting, and transfering admins
+  const [del, setDel] = useState(false);
+
+  const handleCheck = () => {};
   return (
     <>
       <div className="container-fluid">
@@ -108,77 +145,9 @@ export default () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <input type="checkbox" />
-                      </td>
-                      <td>
-                        <div className="action">
-                          <img src={avatar1} alt="" />
-                        </div>
-                      </td>
-                      <td>Harry101</td>
-                      <td>Harry</td>
-                      <td>Maguire</td>
-                      <td>harry@gmail.com</td>
-                      <td>3 hrs </td>
-                      <td>Admin</td>
-                      <td>
-                        <Link to="edit-profile">
-                          <div className="action">
-                            <img src={action} alt="" />
-                          </div>
-                        </Link>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input type="checkbox" />
-                      </td>
-                      <td>
-                        {" "}
-                        <div className="action">
-                          <img src={avatar1} alt="" />
-                        </div>
-                      </td>
-                      <td>Pirates</td>
-                      <td>Jonny</td>
-                      <td>Deep</td>
-                      <td>jonny@gmail.com</td>
-                      <td>5 weeks </td>
-                      <td>Admin Owner</td>
-                      <td>
-                        <Link to="edit-profile">
-                          <div className="action">
-                            <img src={action} />
-                          </div>
-                        </Link>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input type="checkbox" />
-                      </td>
-                      <td>
-                        {" "}
-                        <div className="action">
-                          <img src={avatar1} alt="" />
-                        </div>
-                      </td>
-                      <td>Lukewaler</td>
-                      <td>Luke</td>
-                      <td>Sky-Walker</td>
-                      <td>luke@gmail.com</td>
-                      <td>5 hrs </td>
-                      <td>Admin Owner</td>
-                      <td>
-                        <Link to="edit-profile">
-                          <div className="action">
-                            <img src={action} />
-                          </div>
-                        </Link>
-                      </td>
-                    </tr>
+                    {mockData.adminUsers.map((admindata, i) => (
+                      <TableRow data={admindata} key={i} ref={checkInput} />
+                    ))}
                   </tbody>
                 </table>
               </div>

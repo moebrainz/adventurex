@@ -5,6 +5,7 @@ import tagicon from "../../assets/images/x_tagicon.png";
 import editicon from "../../assets/images/x_editicon.png";
 import Button from "../buttons/Button";
 import { Link } from "react-router-dom";
+import useLogin from "../hooks/useLogin";
 
 const CardWrapper = styled.div`
   display: flex;
@@ -78,25 +79,46 @@ const SectionThreeWrapper = styled.div`
   }
 `;
 
-const ImageIcon = styled.img`
+const Imagewrapper = styled.div`
   width: 230px;
   height: 145px;
   display: block;
   margin-left: auto;
   margin-right: auto;
   padding: 5px 0px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover img {
+    backdrop-filter: blur(20px);
+    opacity: 0.5;
+    z-index: 100;
+  }
 `;
 
 const CardContainer = styled.div`
   padding: 7px;
 `;
 
-export default ({ bookednum, matchesnum, location, tags }) => {
+export default ({
+  bookednum,
+  matchesnum,
+  location,
+  tags,
+  record_id,
+  banner,
+}) => {
+  const { listPackages } = useLogin();
   return (
     <>
       <CardWrapper className="">
         <CardWrap className="card border-0 ">
-          <ImageIcon src={avatar1} class="card-img-top" alt="..." />
+          <Imagewrapper className="banner_wrapper">
+            <img src={banner} class="card-img-top" alt="..." />
+          </Imagewrapper>
           <CardContainer className="card-body">
             <SectionOneWrapper>
               <p className="mb-0">{location}</p>
@@ -112,9 +134,15 @@ export default ({ bookednum, matchesnum, location, tags }) => {
               <p className="mb-0">Matches</p>
             </SectionTwoWrapper>
             <SectionThreeWrapper>
-              <Link to="viewtrip" replace>
+              <Link to={`viewtrip/${record_id}`}>
                 <Button width={170} height={33} content="View Trip" />
               </Link>
+
+              {/* {listPackages.map((e) => (
+                <Link to={`viewtrip/${e._id}`} replace key={e._id}>
+                  <Button width={170} height={33} content="View Trip" />
+                </Link>
+              ))} */}
 
               <div className="ps-3">
                 <img src={editicon} alt="" />

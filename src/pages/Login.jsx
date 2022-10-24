@@ -54,62 +54,39 @@ const Login = () => {
     e.preventDefault();
 
     setLoading(true);
-    try {
-      const response = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({ email: getEmail, password: getPwd }),
+    let sendData = JSON.stringify({ email: getEmail, password: getPwd });
+
+    const response = await axios
+      .post(LOGIN_URL, sendData, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .catch((e) => ({ error: e }));
+
+    setLoading(false);
+
+    console.log(response);
+
+    if (response.error || response?.data?.success !== true) {
+      return toast.error(
+        response?.data?.message ||
+          "Could not submit your request, check your login details",
         {
-          headers: { "Content-Type": "application/json" },
+          position: "bottom-right",
         }
       );
-
-      if (response?.data.success === true) {
-        toast.success("Account Login Successful", {
-          position: "bottom-right",
-        });
-      }
-      //console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.data?.token;
-      const roles = response?.data?.data?.admin?.role;
-      const username = response?.data?.data?.admin?.username;
-
-      // const message = response?.data?.message;
-      setAuth({ getEmail, getPwd, username, roles, accessToken });
-
-      setGetEmail("");
-      setGetPwd("");
-      navigate("/dashboard");
-    } catch (error) {
-      setLoading(false);
-
-      if (error?.response.status === 500) {
-        // Request made and server responded
-        toast.error(
-          "The account does not exist, please check your login details",
-          {
-            position: "bottom-right",
-          }
-        );
-      } else if (error?.response.status === 400) {
-        toast.error("Missing Username or Password", {
-          position: "bottom-right",
-        });
-      } else if (error?.response.status === 401) {
-        toast.error("Unauthorized Account", {
-          position: "bottom-right",
-        });
-      } else if (error?.request) {
-        // The request was made but no response was received
-        toast.error("Unknown Account, try another account", {
-          position: "bottom-right",
-        });
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        toast.error("Login Failed", {
-          position: "bottom-right",
-        });
-      }
     }
+
+    //console.log(JSON.stringify(response?.data));
+    const accessToken = response?.data?.data?.token;
+    const roles = response?.data?.data?.admin?.role;
+    const username = response?.data?.data?.admin?.username;
+
+    // const message = response?.data?.message;
+    setAuth({ getEmail, getPwd, username, roles, accessToken });
+
+    setGetEmail("");
+    setGetPwd("");
+    navigate("/dashboard");
 
     setGetEmail("");
     setGetPwd("");

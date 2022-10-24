@@ -4,6 +4,7 @@ import search from "../../assets/images/x_search_icon.png";
 
 import "../../css/BookedPackages.css";
 import CardReview from "../card-reviews/CardReview";
+import CardReviewData from "../../data/CardReview";
 
 const DashContentWrapper = styled.div`
   display: flex;
@@ -29,6 +30,13 @@ const BookedWrapper = styled.div`
 `;
 
 export default () => {
+  const [searchInput, setSearchInput] = useState("");
+  const handleChange = (e) => {
+    e.preventDefault();
+    setSearchInput(e.target.value);
+  };
+  console.log(searchInput, "from search");
+
   return (
     <>
       <div className="container-fluid">
@@ -49,33 +57,38 @@ export default () => {
                       type="search"
                       placeholder="Search packages"
                       className="p-2 form-control border-0"
+                      onChange={handleChange}
+                      value={searchInput}
                     />
                   </div>
                 </div>
-                <div className="d-flex flex-row flex-wrap">
-                  <div className="mx-2">
-                    <CardReview
-                      location="Hightower"
-                      tags={1000}
-                      bookednum={100}
-                      matchesnum={200}
-                    />
-                  </div>
-                  <div className="mx-2">
-                    <CardReview
-                      location="Hightower"
-                      tags={1000}
-                      bookednum={100}
-                      matchesnum={200}
-                    />
-                  </div>
-                  <div className="mx-2">
-                    <CardReview
-                      location="Hightower"
-                      tags={1000}
-                      bookednum={100}
-                      matchesnum={200}
-                    />
+                <div className="">
+                  <div className=" d-flex flex-row flex-wrap">
+                    {CardReviewData.preview
+                      .filter((card) => {
+                        if (searchInput === "") {
+                          //return empty
+                          return card;
+                        } else if (
+                          card.location_title
+                            .toLowerCase()
+                            .includes(searchInput.toLowerCase())
+                        ) {
+                          //return the filtered result
+                          return card;
+                        }
+                      })
+                      .map((card, i) => (
+                        <div className="m-1">
+                          <CardReview
+                            key={i}
+                            location={card.location_title}
+                            tags={card.tags}
+                            bookednum={card.bookednum}
+                            matchesnum={card.matchesnum}
+                          />
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>

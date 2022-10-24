@@ -13,7 +13,7 @@ const MyButton = styled.button`
   cursor: pointer;
 `;
 
-const ButtonWhite = ({ width, content, height }) => {
+const ButtonWhite = ({ width, content, height, type }) => {
   //   const content = {
   //     login: "Login",
   //     viewTrip: "View Trip",
@@ -21,7 +21,9 @@ const ButtonWhite = ({ width, content, height }) => {
   //   };
   return (
     <>
-      <MyButton style={{ width, height }}>{content}</MyButton>
+      <MyButton style={{ width, height }} type={type}>
+        {content}
+      </MyButton>
     </>
   );
 };
