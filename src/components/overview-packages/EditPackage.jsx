@@ -455,10 +455,10 @@ export default () => {
                                 </span>
                               </button>
                             ))}
-                            <button className="pill_button_display pe-2">
+                            {/* <button className="pill_button_display pe-2">
                               Biking{" "}
                               <span className="pill_button_cancel"> | X</span>
-                            </button>
+                            </button> */}
                           </div>
 
                           <div className="pill_display_s2 p-1">

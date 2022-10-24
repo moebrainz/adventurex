@@ -84,6 +84,8 @@ const Login = () => {
     // const message = response?.data?.message;
     setAuth({ getEmail, getPwd, username, roles, accessToken });
 
+    localStorage.setItem("adminToken", accessToken);
+
     setGetEmail("");
     setGetPwd("");
     navigate("/dashboard");

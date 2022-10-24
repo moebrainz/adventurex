@@ -86,22 +86,45 @@ const Imagewrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: 5px 0px;
+  position: relative;
 
   img {
     width: 100%;
     height: 100%;
   }
 
-  &:hover img {
-    backdrop-filter: blur(20px);
-    opacity: 0.5;
+  div {
+    background-color: black;
+    opacity: 0.6;
+    width: 230px;
+    height: 145px;
+    position: absolute;
+    display: none;
+    border-radius: 5px;
+  }
+  &:hover div {
+    display: block !important;
     z-index: 100;
+    border-radius: 5px;
+  }
+
+  div input {
+    position: relative;
+    top: 5px;
+    left: 5px !important;
   }
 `;
 
 const CardContainer = styled.div`
   padding: 7px;
 `;
+
+// const DeleteWrapper = styled.div`
+
+//   &:hover {
+
+//   }
+// `;
 
 export default ({
   bookednum,
@@ -110,6 +133,7 @@ export default ({
   tags,
   record_id,
   banner,
+  onClick,
 }) => {
   const { listPackages } = useLogin();
   return (
@@ -117,6 +141,10 @@ export default ({
       <CardWrapper className="">
         <CardWrap className="card border-0 ">
           <Imagewrapper className="banner_wrapper">
+            <div>
+              <input type="checkbox" onClick={onClick} className="p-3" />
+            </div>
+
             <img src={banner} class="card-img-top" alt="..." />
           </Imagewrapper>
           <CardContainer className="card-body">

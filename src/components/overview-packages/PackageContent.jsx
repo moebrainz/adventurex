@@ -10,6 +10,7 @@ import "../../css/PackageContent.css";
 import CardOverview from "../card-reviews/CardOverview";
 
 const VIEW_URL = "/list-package";
+const DELETE_URL = "/list-package/";
 
 const DashContentWrapper = styled.div`
   display: flex;
@@ -34,15 +35,37 @@ export default () => {
   const [isLoading, setIsLoading] = React.useState(false);
 
   //calling global state
-  const { listPackages, setListPackages } = useLogin();
+  const { auth, listPackages, setListPackages } = useLogin();
+
+  const token = auth.accessToken;
+  const admin = localStorage.getItem("adminToken", token);
+
+  const config = {
+    headers: { Authorization: admin },
+  };
 
   React.useEffect(() => {
-    postaxios.get(VIEW_URL).then((res) => {
+    postaxios.get(VIEW_URL, config).then((res) => {
       setListData(res?.data?.data);
       setListPackages(res?.data?.data);
       console.log(listPackages, "from listing");
     });
   }, []);
+
+  const handleDelete = async (id) => {
+    console.log(id, "from id");
+
+    // const deleteId = id.findIndex((i) => i._id >= indexedDB.id);
+    // console.log(deleteId);
+
+    await postaxios.delete(`${DELETE_URL}${id}`, config).then((res) => {
+      // setListData(res?.data?.data);
+      // setListPackages(res?.data?.data);
+      console.log(res, "Deleted");
+
+      return false;
+    });
+  };
   // console.log(listData, "from list data");
 
   return (
@@ -104,9 +127,10 @@ export default () => {
             <CardWrapper>
               <div className=" d-flex flex-row flex-wrap gap-3">
                 {listPackages.map((e) => (
-                  // console.log(e)
+                  // console.log(e._id);
                   <CardOverview
                     record_id={e._id}
+                    onClick={() => handleDelete(e._id)}
                     banner={e.thumbnail}
                     key={e._id}
                     location={e.package_name}
