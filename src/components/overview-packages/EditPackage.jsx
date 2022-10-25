@@ -10,7 +10,9 @@ import ButtonWhite from "../buttons/ButtonWhite";
 // import InputThumbnail from "../inputs/InputThumbnail";
 import InputFIle from "../inputs/InputFIle";
 import InputFilesm from "../inputs/InputFilesm";
-import useLogin from "../../components/hooks/useLogin";
+// import useLogin from "../../components/hooks/useLogin";
+import useLogin from "../hooks/useLogin";
+
 //import InputSmall from "../inputs/InputSmall";
 import postaxios from "../../api/postaxios";
 
@@ -55,7 +57,17 @@ export default () => {
   const toast = useToast();
 
   //call the global state that stores the images
-  let { thumbImg } = useLogin();
+  const { auth } = useLogin();
+
+  //config
+  const token = auth.accessToken;
+  const admin = localStorage.getItem("adminToken", token);
+  console.log(admin, "admin token");
+  console.log(token, " token");
+
+  const config = {
+    headers: { Authorization: admin },
+  };
 
   //collect all data
   const [isLoading, setIsLoading] = React.useState(false);
@@ -166,7 +178,9 @@ export default () => {
     // let sendData = JSON.stringify({ packages });
     setLoading(true);
 
-    const response = await postaxios.post(PACKAGE_URL, frmD);
+    const response = await postaxios.post(PACKAGE_URL, frmD, config);
+    console.log(response, "from response");
+    console.log(config);
 
     try {
       if (response || response?.data?.success === true) {
@@ -185,16 +199,14 @@ export default () => {
       setLoading(false);
       console.log(error.message, "error occured");
       if (response.error || response?.data?.success !== true) {
-        return toast(
-          response?.data?.message || {
-            position: "bottom-right",
-            title: "Error Creating Package.",
-            description: "Please check the fields and input required fields.",
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-          }
-        );
+        return toast({
+          position: "bottom-right",
+          title: "Unauthoriseze user",
+          description: response?.data?.message,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
       }
     }
     setLoading(false);
