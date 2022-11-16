@@ -6,6 +6,7 @@ export const LoginContext = ({ children }) => {
   const [auth, setAuth] = useState({});
   const [thumbImg, setThumbImg] = useState({});
   const [listPackages, setListPackages] = useState([]);
+  const [login, setLogin] = useState(false);
 
   return (
     <useLoginContext.Provider
@@ -16,6 +17,8 @@ export const LoginContext = ({ children }) => {
         setThumbImg,
         listPackages,
         setListPackages,
+        login,
+        setLogin,
       }}
     >
       {children}

@@ -42,11 +42,19 @@
   align-items: center;
   text-align: center;
 }
-.navigation__profile ul li img {
+.navigation__profile ul li div {
   height: 2.5rem;
   width: 2.5rem;
 }
+.navigation__profile ul li img {
+  height: 100%;
+  width: 100%;
+}
 
+.proifle_avatar_wrapper {
+  display: flex;
+  flex-direction: column;
+}
 .navigation__profile ul li a {
   font-weight: 400;
   font-size: 14px;

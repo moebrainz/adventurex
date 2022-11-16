@@ -28,7 +28,7 @@ const Login = () => {
   const [pwd, setPwd] = React.useState(false);
 
   //import state from use context
-  const { setAuth } = useLogin();
+  const { auth, setAuth, setLogin } = useLogin();
 
   //variables forreactrouter dom
   const navigate = useNavigate();
@@ -40,13 +40,19 @@ const Login = () => {
   const [errMsg, setErrMsg] = React.useState("");
 
   //set focus on input when the componen loads
-  useEffect(() => {
-    // userRef.current.focus();
-  }, []);
+  // useEffect(() => {
+  //   // userRef.current.focus();
+  // }, []);
 
   //remove error message if the user changes the user state or the password state
   //making error disapper when user are making changes to input fields
   useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    console.log(token);
+    if (token) {
+      navigate("/dashboard");
+      setLogin(true);
+    }
     setErrMsg("");
   }, [getEmail, getPwd]);
 
@@ -66,7 +72,7 @@ const Login = () => {
 
     console.log(response);
 
-    if (response.error || response?.data?.success !== true) {
+    if (response.error || response?.data?.status !== "ok") {
       return toast.error(
         response?.data?.message ||
           "Could not submit your request, check your login details",
@@ -78,17 +84,22 @@ const Login = () => {
 
     //console.log(JSON.stringify(response?.data));
     const accessToken = response?.data?.data?.token;
-    const roles = response?.data?.data?.admin?.role;
-    const username = response?.data?.data?.admin?.username;
+    const success = response?.data?.status;
+    // const roles = response?.data?.data?.admin?.role;
+    const firstName = response?.data?.data?.firstName;
+
+    //store token to local
+    localStorage.setItem("accessToken", accessToken);
+
+    console.log(firstName, "firstname");
 
     // const message = response?.data?.message;
-    setAuth({ getEmail, getPwd, username, roles, accessToken });
+    setAuth({ getEmail, getPwd, firstName, accessToken, success });
 
     localStorage.setItem("adminToken", accessToken);
 
     setGetEmail("");
     setGetPwd("");
-    navigate("/dashboard");
 
     setGetEmail("");
     setGetPwd("");

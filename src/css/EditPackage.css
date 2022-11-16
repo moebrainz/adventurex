@@ -108,3 +108,9 @@ input[type="date"] {
   opacity: 0.4;
   height: 80vh;
 }
+
+.availability_wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}

@@ -20,20 +20,34 @@ const NavContainer = styled.div`
 `;
 
 const Navbar = ({ title }) => {
-  const { auth } = useLogin();
+  const { auth, setAuth, login, setLogin } = useLogin();
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [logged, setLogged] = React.useState("");
+  // console.log(auth.accessToken, "myauth");
+
+  const [logged, setLogged] = React.useState(false);
+  const [getAuth, setGetAuth] = React.useState("");
 
   const handleLogout = () => {
-    setLogged(auth.accessToken);
-    if (logged === logged.length(20)) {
-      setLogged("");
-      navigate("login");
-    }
+    setLogin(false);
+    localStorage.clear();
+
+    // navigate("/");
+
+    // setLogged(auth.accessToken);
   };
+
+  React.useEffect(() => {
+    if (login === false) {
+      navigate("/");
+      console.log(login, "from effects");
+      console.log(auth.success, "success status");
+    }
+  }, [handleLogout]);
+
+  // console.log(login, "login boolean");
   return (
     <>
       <NavContainer>
@@ -63,9 +77,11 @@ const Navbar = ({ title }) => {
                   className="dropdown-menu dropdown-menu-end py-3 mt-2"
                   aria-labelledby="navbarDropdown"
                 >
-                  <li>
-                    <img src={avatar} />
-                    <p className="pt-2">{auth.username}</p>
+                  <li className="proifle_avatar_wrapper">
+                    <div>
+                      <img src={avatar} />
+                    </div>
+                    <p className="pt-2">{auth.firstName}</p>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
@@ -81,7 +97,7 @@ const Navbar = ({ title }) => {
                       replace
                       className="dropdown-item"
                     >
-                      Logout{" "}
+                      Logout
                     </Link>
                   </li>
                 </ul>

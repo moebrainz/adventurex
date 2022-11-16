@@ -54,11 +54,34 @@
   transform: scaleX(1.04);
 }
 
+.packages__list::after {
+  background-image: url("../assets/dashboard/x_vector_icon.png");
+  content: "";
+  display: inline-flex;
+  height: 10px;
+  background-repeat: no-repeat;
+  width: 10px;
+  align-items: center;
+  margin-left: 100px;
+  background-size: contain;
+}
+
 .packages__list:hover .pack__icon {
   background: url("../assets/dashboard/x_packhover.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.package__icon {
+  height: 100%;
+  width: 100%;
+}
+
+.package__wrapper {
+  height: 5px;
+  width: 10px;
+  border-radius: 0px;
 }
 
 .packages__list span .pack__icon {
@@ -182,8 +205,8 @@
   color: #32325d;
 }
 /* from bootstrap */
-.dropdown-toggle::after {
+/* .dropdown-toggle::after {
   position: absolute;
   right: 0;
   margin: 11px;
-}
+} */

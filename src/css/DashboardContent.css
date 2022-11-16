@@ -5,8 +5,15 @@
 }
 
 .filter__icon {
-  height: 0.8rem;
-  width: 0.8rem;
+  height: 100%;
+  width: 100%;
+}
+
+.filter__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .filter__button {
@@ -26,6 +33,11 @@
   justify-content: space-between;
   padding: 0 15px 0 6px;
   cursor: pointer;
+}
+
+.filter_icon_wrapper {
+  height: 0.8rem;
+  width: 0.8rem;
 }
 
 .filter__button ul li a {

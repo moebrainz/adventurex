@@ -9,8 +9,8 @@ import useLogin from "../hooks/useLogin";
 import "../../css/PackageContent.css";
 import CardOverview from "../card-reviews/CardOverview";
 
-const VIEW_URL = "/list-package";
-const DELETE_URL = "/list-package/";
+const VIEW_URL = "/live-package";
+const DELETE_URL = "/packages";
 
 const DashContentWrapper = styled.div`
   display: flex;
@@ -37,11 +37,12 @@ export default () => {
   //calling global state
   const { auth, listPackages, setListPackages } = useLogin();
 
-  const token = auth.accessToken;
-  const admin = localStorage.getItem("adminToken", token);
+  // const token = auth.accessToken;
+  const admin = localStorage.getItem("accessToken");
+  console.log(admin, "admin token");
 
   const config = {
-    headers: { Authorization: admin },
+    headers: { Authorization: `Bearer ${admin}` },
   };
 
   React.useEffect(() => {
@@ -58,7 +59,7 @@ export default () => {
     // const deleteId = id.findIndex((i) => i._id >= indexedDB.id);
     // console.log(deleteId);
 
-    await postaxios.delete(`${DELETE_URL}${id}`, config).then((res) => {
+    await postaxios.delete(`${DELETE_URL}/${id}`, config).then((res) => {
       // setListData(res?.data?.data);
       // setListPackages(res?.data?.data);
       console.log(res, "Deleted");
@@ -131,7 +132,7 @@ export default () => {
                   <CardOverview
                     record_id={e._id}
                     onClick={() => handleDelete(e._id)}
-                    banner={e.thumbnail}
+                    // banner={e.thumbnail}
                     key={e._id}
                     location={e.package_name}
                     tags={1000}

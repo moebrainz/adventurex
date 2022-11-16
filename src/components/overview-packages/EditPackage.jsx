@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 // import download from "../assets/images/x_download_icon.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -56,14 +56,16 @@ export default () => {
   const navigate = useNavigate();
   const toast = useToast();
 
+  //call on use ref
+  const dateRef = useRef();
+  const timeRef = useRef();
+
   //call the global state that stores the images
   const { auth } = useLogin();
 
   //config
-  const token = auth.accessToken;
-  const admin = localStorage.getItem("adminToken", token);
-  // console.log(admin, "admin token");
-  // console.log(token, " token");
+  // const token = auth.accessToken;
+  const admin = localStorage.getItem("accessToken");
 
   const config = {
     headers: { Authorization: admin },
@@ -76,17 +78,20 @@ export default () => {
 
   //DATA STATES FOR EACH INPUTS
   const [packageName, setPackageName] = React.useState("");
-  const [expiringDate, setExpiringDate] = React.useState("");
-  const [itinery, seItitinery] = React.useState("");
+  // const [expiringDate, setExpiringDate] = React.useState("");
+  const [availabilityDate, setAvailabilityDate] = React.useState("");
+  const [availabilityTime, setAvailabilityTime] = React.useState("");
+  const [about, setAbout] = React.useState("");
   const [price, setPrice] = React.useState("");
-  const [tripCode, setTripCode] = React.useState("");
+  const [infantBilling, setInfantBilling] = React.useState("");
+  // const [tripCode, setTripCode] = React.useState("");
   const [travelStyle, setTravelStyle] = React.useState("");
   const [ageRange, setAgeRange] = React.useState("");
   const [accomodationLodging, setAccomodationLodging] = React.useState("");
   const [thumbnail, setThumbnail] = React.useState("");
   const [bannerthumbnail, setBannerthumbnail] = React.useState("");
   const [travelDuration, setTravelDuration] = React.useState("");
-  const [file, setFile] = React.useState([]);
+  const [citiesImages, setCitiesImages] = React.useState([]);
 
   let [inputData, setInputData] = useState("");
   let [pilldisplay, setPilldisplay] = useState([]);
@@ -148,36 +153,34 @@ export default () => {
     reqHeader.append("Authorization", admin);
 
     const packages = {
-      package_name: packageName,
-      epiring_date: expiringDate,
-      itenerary: itinery,
-      price_per_person: price,
-      trip_code: tripCode,
-      travel_style: travelStyle,
-      age_range: ageRange,
+      packageName: packageName,
+      about: about,
+      pricePerPerson: price,
+      travelStyle: travelStyle,
+      ageRange: ageRange,
       accomodation: accomodationLodging,
       activities: pilldisplay,
-      included: pilldisplay2,
       thumbnail: thumbnail,
       banner: bannerthumbnail,
-      // travel_duration: travelDuration,
-      // attractions: file,
+      tripDuration: travelDuration,
+      citiesImages: citiesImages,
     };
 
     let frmD = new FormData();
-    frmD.append("package_name", packageName);
-    frmD.append("epiring_date", expiringDate);
-    frmD.append("itenerary", itinery);
-    frmD.append("price_per_person", price);
-    frmD.append("trip_code", tripCode);
-    frmD.append("travel_style", travelStyle);
-    frmD.append("age_range", ageRange);
+    frmD.append("packageName", packageName);
+    frmD.append("about", about);
+    frmD.append("pricePerPerson", price);
+    frmD.append("availabilityDate", availabilityDate);
+    frmD.append("availabilityTime", availabilityTime);
+    frmD.append("pricePerPerson", price);
+    frmD.append("travelStyle", travelStyle);
+    frmD.append("infantBilling", infantBilling);
+    frmD.append("ageRange", ageRange);
     frmD.append("accomodation", accomodationLodging);
     frmD.append("activities", JSON.stringify(pilldisplay));
-    frmD.append("included", JSON.stringify(pilldisplay2));
     frmD.append("thumbnail", thumbnail);
     frmD.append("banner", bannerthumbnail);
-    frmD.append("travel_duration", travelDuration);
+    frmD.append("tripDuration", travelDuration);
 
     console.log(frmD);
     // let sendData = JSON.stringify({ packages });
@@ -314,32 +317,69 @@ export default () => {
                           onChange={(e) => setPackageName(e.target.value)}
                           // required
                         />
-                        <label
-                          htmlFor="expiringdate"
-                          className="form-label"
-                        >{`Expiring date (optional)`}</label>
-                        <input
-                          type="date"
-                          className="form-control mb-4"
-                          // aria-label="Exoiring date"
-                          id="expiringdate"
-                          name="expiringDate"
-                          value={expiringDate}
-                          onChange={(e) => setExpiringDate(e.target.value)}
-                        />
 
                         <label htmlFor="itinerary" className="form-label">
-                          Itinerary
+                          Availability
+                        </label>
+                        <div className="availability_wrapper">
+                          <input
+                            className="form-control mb-4"
+                            type="text"
+                            ref={dateRef}
+                            placeholder="Choose a date"
+                            onFocus={() => (dateRef.current.type = "date")}
+                            onBlur={() => (dateRef.current.type = "text")}
+                            id="availabilityDate"
+                            name="availabilityDate"
+                            // defaultValue="Choose a date"
+                            value={availabilityDate}
+                            onChange={(e) =>
+                              setAvailabilityDate(e.target.value)
+                            }
+                          />
+                          <input
+                            type="text"
+                            ref={timeRef}
+                            className="form-control mb-4"
+                            placeholder="Choose a time"
+                            aria-label="availabilityTime"
+                            id="availabilityTime"
+                            onFocus={() => (timeRef.current.type = "time")}
+                            onBlur={() => (timeRef.current.type = "text")}
+                            name="availabilityTime"
+                            value={availabilityTime}
+                            onChange={(e) =>
+                              setAvailabilityTime(e.target.value)
+                            }
+                          />
+                        </div>
+
+                        <label htmlFor="nameofpackage" className="form-label">
+                          {`Trip Duration (optional)`}
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control mb-4"
+                          placeholder="Travel Duration"
+                          aria-label="Trip code"
+                          id="tripcode"
+                          name="tripCode"
+                          value={travelDuration}
+                          onChange={(e) => setTravelDuration(e.target.value)}
+                          // required
+                        />
+                        <label htmlFor="itinerary" className="form-label">
+                          About
                         </label>
                         <textarea
                           type="text"
                           className="form-control mb-4"
-                          placeholder="Itinerary"
-                          aria-label="Itinerary"
-                          id="nameofpackage"
-                          name="itinery"
-                          value={itinery}
-                          onChange={(e) => seItitinery(e.target.value)}
+                          placeholder="About"
+                          aria-label="about"
+                          id="about"
+                          name="about"
+                          value={about}
+                          onChange={(e) => setAbout(e.target.value)}
                         />
                         <InputFIle
                           title="Thumbnail"
@@ -361,37 +401,6 @@ export default () => {
                         onChange={(e) => setBannerthumbnail(e)}
                       /> */}
 
-                        <label htmlFor="priceperperson" className="form-label">
-                          Price per Person
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control mb-4"
-                          placeholder="Price per person"
-                          aria-label="Price per person"
-                          id="priceperperson"
-                          name="price"
-                          value={price}
-                          onChange={(e) => setPrice(e.target.value)}
-                        />
-                        <label htmlFor="tripcode" className="form-label">
-                          Trip code
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control mb-4"
-                          placeholder="Trip code"
-                          aria-label="Trip code"
-                          id="tripcode"
-                          name="tripCode"
-                          value={tripCode}
-                          onChange={(e) => setTripCode(e.target.value)}
-                        />
-                      </div>
-                      {/* left section end*/}
-
-                      {/* right section */}
-                      <div className="col-md-6">
                         <label htmlFor="travelstyle" className="form-label">
                           Travel Style
                         </label>
@@ -404,24 +413,29 @@ export default () => {
                             value={travelStyle}
                             onChange={(e) => setTravelStyle(e.target.value)}
                           >
+                            <option value="private">Private</option>
                             <option value="self_guided">Self Guided</option>
                             <option value="small_group">{`Small Group < 12`}</option>
                             <option value="large_group">{`Large Group 20 >`}</option>
                           </select>
                         </div>
+                      </div>
+                      {/* left section end*/}
 
-                        <label htmlFor="tripcode" className="form-label">
-                          Travel Duration
+                      {/* right section */}
+                      <div className="col-md-6">
+                        <label htmlFor="priceperperson" className="form-label">
+                          Price per Person
                         </label>
                         <input
                           type="text"
                           className="form-control mb-4"
-                          placeholder="Travel Duration"
-                          aria-label="Trip code"
-                          id="tripcode"
-                          name="tripCode"
-                          value={travelDuration}
-                          onChange={(e) => setTravelDuration(e.target.value)}
+                          placeholder="Price per person"
+                          aria-label="Price per person"
+                          id="priceperperson"
+                          name="price"
+                          value={price}
+                          onChange={(e) => setPrice(e.target.value)}
                         />
 
                         <label htmlFor="expiringdate" className="form-label">
@@ -440,6 +454,22 @@ export default () => {
                             <option value="16-20">16-20</option>
                             <option value="20-30">20-30</option>
                             <option value="50 and above">50 and above</option>
+                          </select>
+                        </div>
+
+                        <label htmlFor="expiringdate" className="form-label">
+                          Infant Billing
+                        </label>
+                        <div className="select_wrapper">
+                          <select
+                            className=" form-select mb-4"
+                            name="ageRange"
+                            id="agerange"
+                            value={infantBilling}
+                            onChange={(e) => setInfantBilling(e.target.value)}
+                          >
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
                           </select>
                         </div>
 
@@ -515,7 +545,7 @@ export default () => {
                           </div>
                         </div>
 
-                        <label htmlFor="priceperperson" className="form-label">
+                        {/* <label htmlFor="priceperperson" className="form-label">
                           What's included
                         </label>
                         <div className="mb-4">
@@ -537,10 +567,7 @@ export default () => {
                                 </span>
                               </button>
                             ))}
-                            {/* <button className="pill_button_display pe-2">
-                              Biking{" "}
-                              <span className="pill_button_cancel"> | X</span>
-                            </button> */}
+                           
                           </div>
 
                           <div className="pill_display_s2 p-1">
@@ -554,7 +581,6 @@ export default () => {
                               onChange={(e) =>
                                 setInputData2(e.target.value.trim())
                               }
-                              // pilldisplay.activities = e.target.value;
                               name="included"
                             />
                             <button className="pill_button" onClick={addPill2}>
@@ -562,12 +588,12 @@ export default () => {
                               Add
                             </button>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="file_inputsm">
                           <InputFilesm
                             title={`Cites & Attractions`}
-                            inputname="file"
-                            onChange={(e) => setFile(e)}
+                            inputname="citiesImages"
+                            onChange={(e) => setCitiesImages(e)}
                           />
                         </div>
 

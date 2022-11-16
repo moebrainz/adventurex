@@ -14,13 +14,13 @@ const DashContentWrapper = styled.div`
   flex-direction: column;
   padding: 20px 10px;
 `;
-
 const CardWrapper = styled.div`
   padding: 30px 30px 15px 30px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 `;
+
 export default () => {
   const navigate = useNavigate();
   let params = useParams();
@@ -103,7 +103,7 @@ export default () => {
                 <div className="col-xl-8">
                   <span className="d-flex flex-row pt-4 pb-3 align-items-center">
                     <h5 className="pe-3 mb-0 _heading">
-                      {getviewList.package_name}
+                      {getviewList.packageName}
                     </h5>{" "}
                     {/* {`Hiking & Walking`} */}
                     {/* <div>
@@ -111,7 +111,7 @@ export default () => {
                     </div> */}
                   </span>
 
-                  <p className="_subheading">{`Lorem ipsum dolor sit amet, consectetur adipiscing elit. At id amet non, id tincidunt. Fames in diam sit quis eget consectetur pretium augue. Sed donec aliquam amet fermentum sem. Egestas justo, accumsan tortor suspendisse. Vitae purus molestie diam lacus scelerisque. Accumsan orci nibh ullamcorper hac venenatis gravida ut aliquam. Rhoncus, morbi tortor leo diam. Sed maecenas nisl pretium at nunc aliquet. Ac lectus.`}</p>
+                  <p className="_subheading">{getviewList.about}</p>
                 </div>
                 <div className="col-xl-4 ps-1">
                   {/* left section */}
@@ -122,12 +122,14 @@ export default () => {
                         <p className="_heading_leftsection mb-1">
                           Trip Duration
                         </p>
-                        <p className="_subheading_leftsection">3 - 5 Hours</p>
+                        <p className="_subheading_leftsection">
+                          {getviewList.tripDuration}
+                        </p>
                       </div>
                       <div className="col">
                         <p className="_heading_leftsection mb-1">Age Range</p>
                         <p className="_subheading_leftsection">
-                          {`${getviewList.age_range} years`}{" "}
+                          {`${getviewList.ageRange}`}{" "}
                         </p>
                       </div>
                       <div className="col">
@@ -142,14 +144,14 @@ export default () => {
                           Travel Style
                         </p>
                         <p className="_subheading_leftsection">
-                          {getviewList.travel_style?.replace("_", " ")}
+                          {getviewList.travelStyle}
                         </p>
                       </div>
                       <div className="col">
                         <p className="_heading_leftsection mb-1">
                           Price Per Person
                         </p>
-                        <p className="_subheading_leftsection">{`$${getviewList.price_per_person}`}</p>
+                        <p className="_subheading_leftsection">{`$${getviewList.pricePerPerson}`}</p>
                       </div>
                       <div className="col">
                         <p className="_heading_leftsection mb-1">
@@ -163,33 +165,46 @@ export default () => {
               </div>
               <div className="row">
                 <div className="col-xl-8">
-                  <h5 className="_heading">Other Activities</h5>
+                  <h5 className="_heading"> Activities</h5>
                   <div className="d-flex flex-row flex-wrap">
-                    {getviewList.activities?.map((list, i) => {
-                      let a_list = JSON.parse(list);
-                      console.log(a_list, "this list");
-                      return a_list.map((e) => (
-                        <div
-                          className="badge rounded-pill pill my-2 mx-2"
-                          key={i}
-                        >
-                          <p className=" p-2 mb-0">{e?.value}</p>
-                        </div>
-                      ));
-                    })}
+                    {getviewList.activities?.map((list, i) => (
+                      // let a_list = JSON.parse(list);
+                      // console.log(a_list, "this list");
+
+                      <div
+                        className="badge rounded-pill pill my-2 mx-2"
+                        key={i}
+                      >
+                        <p className=" p-2 mb-0">{list}</p>
+                        {/* {console.log(list)} */}
+                      </div>
+                      // return a_list.map((e) => (
+                      //   <div
+                      //     className="badge rounded-pill pill my-2 mx-2"
+                      //     key={i}
+                      //   >
+                      //     <p className=" p-2 mb-0">{e?.value}</p>
+                      //   </div>
+                      // ));
+                    ))}
                   </div>
                 </div>
-                <div className="col-xl-4 ps-1">
+                {/* <div className="col-xl-4 ps-1">
                   <h5 className="_heading">What's included</h5>
                   <div className="d-flex flex-row flex-wrap">
                     {getviewList.included?.map((list) => {
                       let a_list = JSON.parse(list);
+
                       console.log(a_list, "this list");
                       return a_list.map((e, i) => (
                         <div
                           className="badge rounded-pill pill my-2 mx-2"
                           key={i}
                         >
+                          {console.log(
+                            JSON.stringify(localStorage?.setItem("list", e[1])),
+                            "from storage list"
+                          )}
                           <p className=" p-2 mb-0">{e?.value}</p>
                         </div>
                       ));
@@ -197,7 +212,7 @@ export default () => {
 
                     <div></div>
                   </div>
-                </div>
+                </div> */}
               </div>
               {/* 
               For Inserting the next rows

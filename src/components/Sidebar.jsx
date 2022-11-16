@@ -3,6 +3,7 @@ import styled from "styled-components";
 import logoIcon from "../assets/x_logo_icon.png";
 import logo from "../assets/x_logo.png";
 import { Link, NavLink } from "react-router-dom";
+import vector from "../assets/dashboard/x_vector_icon.png";
 
 import "../css/Sidebar.css";
 
@@ -87,7 +88,9 @@ const Sidebar = () => {
                     <div className="pack__icon" />
                   </span>
                   Packages
-                  <span className="dropdown-toggle"></span>
+                  {/* <span className="package__wrapper">
+                    <img src={vector} alt="" className="package__icon" />
+                  </span> */}
                 </li>
 
                 <input type="checkbox" id="touch" />

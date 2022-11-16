@@ -6,6 +6,7 @@ import React from "react";
 // import ViewTrip from "../components/ViewTrip";
 import Layout from "./Layout";
 import { Outlet } from "react-router-dom";
+
 // import PackageContent from "../components/PackageContent";
 
 const BookedPackages = () => {

@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import filter from "../assets/dashboard/x_filter_icon.png";
-import signups from "../assets/dashboard/x_signup_icon.png";
-import completed from "../assets/dashboard/x_ctest.png";
-import uncompleted from "../assets/dashboard/x_uctest.png";
-import savedpackages from "../assets/dashboard/x_saved_packages.png";
-import bookedpackages from "../assets/dashboard/x_booked_packages.png";
+// import signups from "../assets/dashboard/x_signup_icon.png";
+// import completed from "../assets/dashboard/x_ctest.png";
+// import uncompleted from "../assets/dashboard/x_uctest.png";
+// import savedpackages from "../assets/dashboard/x_saved_packages.png";
+// import bookedpackages from "../assets/dashboard/x_booked_packages.png";
 import DashMockData from "../data/DashData";
+import useLogin from "./hooks/useLogin";
 
 import "../css/DashboardContent.css";
 import InfoCard from "./card-reviews/InfoCard";
@@ -28,26 +29,29 @@ const CardWrapper = styled.div`
   overflow: hidden;
 `;
 const DashboardContent = () => {
+  const { auth } = useLogin();
   return (
     <>
       <div className="container-fluid">
         <DashContentWrapper>
           <div className="">
-            <p className="_heading">Hello Admin,</p>
+            <p className="_heading">{`Hello ${auth.firstName}`}</p>
             <p className="_subheading">Here is your latest report</p>
           </div>
           <div className="dash__section2 container-fluid px-0">
             <FilterWrapper>
               <div className="filter__button dropdown ">
                 <div
-                  className="border-0"
+                  className="border-0 filter__wrapper"
                   role="button"
                   id="dropdownMenuButton1"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   <button className="border-0 bg-white ">Filter</button>
-                  <img src={filter} className="filter__icon" alt="" />
+                  <div className="filter_icon_wrapper">
+                    <img src={filter} className="filter__icon" alt="" />
+                  </div>
                 </div>
 
                 <ul
