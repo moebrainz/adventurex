@@ -39,6 +39,10 @@ const EditWrapper = styled.div`
     padding: 8px;
   }
 
+  span {
+    background: rgba(247, 249, 248, 0.8);
+  }
+
   textarea {
     background: rgba(247, 249, 248, 0.8);
   }
@@ -108,6 +112,8 @@ export default () => {
     borderColor: "white",
   };
 
+  // console.log(bannerthumbnail, "banner thumb");
+  // console.log(thumbnail, "banner thumb");
   // console.log(pilldisplay);
   //handle pill function
   const addPill = (e) => {
@@ -152,18 +158,20 @@ export default () => {
     e.preventDefault();
 
     let reqHeader = new Headers();
-    reqHeader.append("Authorization", admin);
+    reqHeader.append("Authorization", `Bearer ${admin}`);
 
     const packages = {
       packageName: packageName,
       about: about,
+      availabilityDate: availabilityDate,
+      availabilityTime: availabilityTime,
       pricePerPerson: price,
       travelStyle: travelStyle,
       ageRange: ageRange,
       accomodation: accomodationLodging,
       activities: pilldisplay,
       thumbnail: thumbnail,
-      banner: bannerthumbnail,
+      bannerImg: bannerthumbnail,
       tripDuration: travelDuration,
       citiesImages: citiesImages,
       withInfant: pricePerInfant,
@@ -175,7 +183,7 @@ export default () => {
     frmD.append("pricePerPerson", price);
     frmD.append("availabilityDate", availabilityDate);
     frmD.append("availabilityTime", availabilityTime);
-    frmD.append("pricePerPerson", price);
+    // frmD.append("pricePerPerson", price);
     frmD.append("travelStyle", travelStyle);
     // frmD.append("infantBilling", infantBilling);
     frmD.append("ageRange", ageRange);
@@ -187,7 +195,7 @@ export default () => {
     frmD.append("withInfant", pricePerInfant);
     frmD.append("citiesImages", citiesImages);
 
-    console.log(frmD);
+    console.log(frmD, "all data");
     // let sendData = JSON.stringify({ packages });
     setLoading(true);
 
@@ -445,16 +453,24 @@ export default () => {
                         <label htmlFor="priceperperson" className="form-label">
                           Price per Person
                         </label>
-                        <input
-                          type="number"
-                          className="form-control mb-4"
-                          placeholder="Price per person"
-                          aria-label="Price per person"
-                          id="priceperperson"
-                          name="price"
-                          value={price}
-                          onChange={(e) => setPrice(e.target.value)}
-                        />
+                        <div className="ppp_input_wrapper">
+                          <span
+                            className="mb-4 input-group-text"
+                            id="basic-addon2"
+                          >
+                            $
+                          </span>
+                          <input
+                            type="number"
+                            className="form-control mb-4"
+                            placeholder="Price per person"
+                            aria-label="Price per person"
+                            id="priceperperson"
+                            name="price"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                          />
+                        </div>
 
                         {/* Age Range */}
 
@@ -526,19 +542,22 @@ export default () => {
                             >
                               Price Per Infant
                             </label>
-                            <input
-                              type="number"
-                              className="form-control mb-4"
-                              placeholder="Price Per Infant"
-                              aria-label="pricePerInfant"
-                              id="pricePerInfant"
-                              name="pricePerInfant"
-                              value={pricePerInfant}
-                              onChange={(e) =>
-                                setPricePerInfant(e.target.value)
-                              }
-                              // required
-                            />
+                            <div>
+                              <span>$</span>
+                              <input
+                                type="number"
+                                className="form-control mb-4"
+                                placeholder="Price Per Infant"
+                                aria-label="pricePerInfant"
+                                id="pricePerInfant"
+                                name="pricePerInfant"
+                                value={pricePerInfant}
+                                onChange={(e) =>
+                                  setPricePerInfant(e.target.value)
+                                }
+                                // required
+                              />
+                            </div>
                           </div>
                         )}
 

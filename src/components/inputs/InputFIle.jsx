@@ -53,6 +53,7 @@ const InputFIle = ({ title, onChange }) => {
     setFile(file[0]);
     setPreviewUrl(URL.createObjectURL(file[0]));
     onChange(file[0]);
+    console.log(file[0], "files in inputs");
   };
 
   // const reader = new FileReader();

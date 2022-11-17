@@ -50,6 +50,7 @@ const InputFilesm = ({ title, inputname, onChange }) => {
   //state for handling multiple image input
   const [updateImage, setUpdateImage] = React.useState([]);
   const [editIndex, setEditIndex] = React.useState(null);
+  const [mainFile, setMainFile] = React.useState([]);
 
   const [file, setFile] = useState(null);
   const [getFiles, setGetFiles] = useState([]);
@@ -60,16 +61,19 @@ const InputFilesm = ({ title, inputname, onChange }) => {
     setFile(file[0]);
 
     setUpdateImage([...updateImage, URL.createObjectURL(file[0])]);
-    setGetFiles([...getFiles, file]);
+    setGetFiles([...getFiles, file[0]]);
     setPreviewUrl([URL.createObjectURL(file[0])]);
   };
   onChange(getFiles);
 
-  //const imageFile = Array.from(getFiles);
-  // console.log("from file", file);
-  // console.log("from getFIle", getFiles);
-
-  // console.log('from image Files', imageFIle);
+  // // const imageFile = Array.from(getFiles);
+  // const imgf = getFiles.map((f) => {
+  //   console.log(f[0]);
+  // });
+  // console.log(mainFile, "main file");
+  // console.log(imgf, " file");
+  // // console.log("from file", file);
+  // // console.log("from getFIle", getFiles);
 
   console.log("from update", updateImage);
   // console.log("from preview", previewUrl);

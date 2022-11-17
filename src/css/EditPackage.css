@@ -121,3 +121,11 @@ input[type="date"] {
 .infant_price_no {
   display: none;
 }
+
+.ppp_input_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
