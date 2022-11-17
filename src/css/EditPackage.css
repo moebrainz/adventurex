@@ -114,3 +114,10 @@ input[type="date"] {
   flex-direction: row;
   gap: 15px;
 }
+
+.infant_price_yes {
+  display: block;
+}
+.infant_price_no {
+  display: none;
+}

@@ -67,7 +67,7 @@ export default () => {
               <div className=" row">
                 <div className=" col-xl-8">
                   <div className="view_bigimg">
-                    <img src={getviewList.thumbnail} alt="" />
+                    <img src={getviewList.bannerImg} alt="" />
                   </div>
                 </div>
                 <div className="d-flex flex-row flex-wrap col-xl-4">

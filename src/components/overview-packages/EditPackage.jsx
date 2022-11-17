@@ -50,7 +50,8 @@ const EditWrapper = styled.div`
   }
 `;
 
-const PACKAGE_URL = "/add-package";
+const PACKAGE_LIVE_URL = "/live-package";
+const PACKAGE_DRAFT_URL = "/draft-package";
 
 export default () => {
   const navigate = useNavigate();
@@ -68,7 +69,7 @@ export default () => {
   const admin = localStorage.getItem("accessToken");
 
   const config = {
-    headers: { Authorization: admin },
+    headers: { Authorization: `Bearer ${admin}` },
   };
 
   // axiox.post("{url}", "{body}", { headers: reqHeader });
@@ -86,12 +87,13 @@ export default () => {
   const [infantBilling, setInfantBilling] = React.useState("");
   // const [tripCode, setTripCode] = React.useState("");
   const [travelStyle, setTravelStyle] = React.useState("");
+  const [pricePerInfant, setPricePerInfant] = React.useState("");
   const [ageRange, setAgeRange] = React.useState("");
   const [accomodationLodging, setAccomodationLodging] = React.useState("");
   const [thumbnail, setThumbnail] = React.useState("");
   const [bannerthumbnail, setBannerthumbnail] = React.useState("");
   const [travelDuration, setTravelDuration] = React.useState("");
-  const [citiesImages, setCitiesImages] = React.useState([]);
+  let [citiesImages, setCitiesImages] = React.useState([]);
 
   let [inputData, setInputData] = useState("");
   let [pilldisplay, setPilldisplay] = useState([]);
@@ -164,6 +166,7 @@ export default () => {
       banner: bannerthumbnail,
       tripDuration: travelDuration,
       citiesImages: citiesImages,
+      withInfant: pricePerInfant,
     };
 
     let frmD = new FormData();
@@ -174,13 +177,15 @@ export default () => {
     frmD.append("availabilityTime", availabilityTime);
     frmD.append("pricePerPerson", price);
     frmD.append("travelStyle", travelStyle);
-    frmD.append("infantBilling", infantBilling);
+    // frmD.append("infantBilling", infantBilling);
     frmD.append("ageRange", ageRange);
     frmD.append("accomodation", accomodationLodging);
     frmD.append("activities", JSON.stringify(pilldisplay));
     frmD.append("thumbnail", thumbnail);
-    frmD.append("banner", bannerthumbnail);
+    frmD.append("bannerImg", bannerthumbnail);
     frmD.append("tripDuration", travelDuration);
+    frmD.append("withInfant", pricePerInfant);
+    frmD.append("citiesImages", citiesImages);
 
     console.log(frmD);
     // let sendData = JSON.stringify({ packages });
@@ -192,8 +197,8 @@ export default () => {
     // return console.log(response, "response");
 
     try {
-      const response = await postaxios.post(PACKAGE_URL, frmD, {
-        headers: { Authorization: admin },
+      const response = await postaxios.post(PACKAGE_LIVE_URL, frmD, {
+        headers: { Authorization: `Bearer ${admin}` },
       });
       setLoading(false);
       if (response && response?.data?.success === true) {
@@ -302,6 +307,8 @@ export default () => {
                   <form onSubmit={handleAddPackage}>
                     <div className="row g-5">
                       {/* left section */}
+
+                      {/* package Name */}
                       <div className="col-md-6 border-right">
                         <label htmlFor="nameofpackage" className="form-label">
                           Name of Package
@@ -318,6 +325,7 @@ export default () => {
                           // required
                         />
 
+                        {/* Availability */}
                         <label htmlFor="itinerary" className="form-label">
                           Availability
                         </label>
@@ -354,6 +362,7 @@ export default () => {
                           />
                         </div>
 
+                        {/* Trip Duration */}
                         <label htmlFor="nameofpackage" className="form-label">
                           {`Trip Duration (optional)`}
                         </label>
@@ -368,6 +377,8 @@ export default () => {
                           onChange={(e) => setTravelDuration(e.target.value)}
                           // required
                         />
+
+                        {/* About */}
                         <label htmlFor="itinerary" className="form-label">
                           About
                         </label>
@@ -381,10 +392,14 @@ export default () => {
                           value={about}
                           onChange={(e) => setAbout(e.target.value)}
                         />
+
+                        {/* Thumbnail */}
                         <InputFIle
                           title="Thumbnail"
                           onChange={(e) => setThumbnail(e)}
                         />
+
+                        {/* Banner */}
                         <InputFIle
                           title="Banner"
                           onChange={(e) => setBannerthumbnail(e)}
@@ -401,6 +416,7 @@ export default () => {
                         onChange={(e) => setBannerthumbnail(e)}
                       /> */}
 
+                        {/* Travel Style */}
                         <label htmlFor="travelstyle" className="form-label">
                           Travel Style
                         </label>
@@ -413,22 +429,24 @@ export default () => {
                             value={travelStyle}
                             onChange={(e) => setTravelStyle(e.target.value)}
                           >
-                            <option value="private">Private</option>
-                            <option value="self_guided">Self Guided</option>
-                            <option value="small_group">{`Small Group < 12`}</option>
-                            <option value="large_group">{`Large Group 20 >`}</option>
+                            <option value="Private">Private</option>
+                            <option value="Self guided">Self Guided</option>
+                            <option value="Small group">{`Small Group < 12`}</option>
+                            <option value="Large group">{`Large Group 20 >`}</option>
                           </select>
                         </div>
                       </div>
                       {/* left section end*/}
 
                       {/* right section */}
+
+                      {/* Price per person */}
                       <div className="col-md-6">
                         <label htmlFor="priceperperson" className="form-label">
                           Price per Person
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control mb-4"
                           placeholder="Price per person"
                           aria-label="Price per person"
@@ -437,6 +455,8 @@ export default () => {
                           value={price}
                           onChange={(e) => setPrice(e.target.value)}
                         />
+
+                        {/* Age Range */}
 
                         <label htmlFor="expiringdate" className="form-label">
                           Age range
@@ -457,6 +477,8 @@ export default () => {
                           </select>
                         </div>
 
+                        {/* Infant Billing */}
+
                         <label htmlFor="expiringdate" className="form-label">
                           Infant Billing
                         </label>
@@ -473,6 +495,54 @@ export default () => {
                           </select>
                         </div>
 
+                        {/* Price For Infant */}
+                        {infantBilling === "yes" ? (
+                          <div className="infant_price_yes">
+                            <label
+                              htmlFor="nameofpackage"
+                              className="form-label"
+                            >
+                              Price Per Infant
+                            </label>
+                            <input
+                              type="number"
+                              className="form-control mb-4"
+                              placeholder="Price Per Infant"
+                              aria-label="pricePerInfant"
+                              id="pricePerInfant"
+                              name="pricePerInfant"
+                              value={pricePerInfant}
+                              onChange={(e) =>
+                                setPricePerInfant(e.target.value)
+                              }
+                              // required
+                            />
+                          </div>
+                        ) : (
+                          <div className="infant_price_no">
+                            <label
+                              htmlFor="nameofpackage"
+                              className="form-label"
+                            >
+                              Price Per Infant
+                            </label>
+                            <input
+                              type="number"
+                              className="form-control mb-4"
+                              placeholder="Price Per Infant"
+                              aria-label="pricePerInfant"
+                              id="pricePerInfant"
+                              name="pricePerInfant"
+                              value={pricePerInfant}
+                              onChange={(e) =>
+                                setPricePerInfant(e.target.value)
+                              }
+                              // required
+                            />
+                          </div>
+                        )}
+
+                        {/* Accomodation */}
                         <label
                           htmlFor="accomodationlodging"
                           className="form-label"
@@ -489,13 +559,14 @@ export default () => {
                               setAccomodationLodging(e.target.value)
                             }
                           >
-                            <option value="2 star">2 star</option>
-                            <option value="3 star">3 star</option>
-                            <option value="4 star">4 star</option>
-                            <option value="5 star">5 star</option>
+                            <option value="2 Star">2 star</option>
+                            <option value="3 Star">3 star</option>
+                            <option value="4 Star">4 star</option>
+                            <option value="5 Star">5 star</option>
                           </select>
                         </div>
 
+                        {/* Activities */}
                         <label htmlFor="priceperperson" className="form-label">
                           Activities
                         </label>
@@ -589,6 +660,8 @@ export default () => {
                             </button>
                           </div>
                         </div> */}
+
+                        {/* Cities Images */}
                         <div className="file_inputsm">
                           <InputFilesm
                             title={`Cites & Attractions`}

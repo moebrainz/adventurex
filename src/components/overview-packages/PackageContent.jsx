@@ -39,6 +39,7 @@ export default () => {
 
   // const token = auth.accessToken;
   const admin = localStorage.getItem("accessToken");
+  console.log(listPackages, "from packages");
   console.log(admin, "admin token");
 
   const config = {
@@ -132,9 +133,9 @@ export default () => {
                   <CardOverview
                     record_id={e._id}
                     onClick={() => handleDelete(e._id)}
-                    // banner={e.thumbnail}
+                    banner={e.bannerImg}
                     key={e._id}
-                    location={e.package_name}
+                    location={e.packageName}
                     tags={1000}
                     bookednum={100}
                     matchesnum={200}

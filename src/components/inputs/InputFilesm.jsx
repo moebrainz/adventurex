@@ -65,11 +65,15 @@ const InputFilesm = ({ title, inputname, onChange }) => {
   };
   onChange(getFiles);
 
+  //const imageFile = Array.from(getFiles);
   // console.log("from file", file);
   // console.log("from getFIle", getFiles);
 
+  // console.log('from image Files', imageFIle);
+
   console.log("from update", updateImage);
   // console.log("from preview", previewUrl);
+  console.log(getFiles, "from files");
 
   const handleChange = (file) => {
     //check that the img exist
