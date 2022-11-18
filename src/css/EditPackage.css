@@ -100,13 +100,13 @@ input[type="date"] {
 }
 
 .spinner_wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 200px;
-  background-color: black;
-  opacity: 0.4;
   height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: white;
 }
 
 .availability_wrapper {
@@ -122,10 +122,27 @@ input[type="date"] {
   display: none;
 }
 
-.ppp_input_wrapper {
+.ppperson_input_wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   align-content: center;
+}
+.ppinfants_input_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.loader_wrapper {
+  height: 180px;
+  width: 180px;
+}
+
+.loader_wrapper img {
+  height: 100%;
+  width: 100%;
 }

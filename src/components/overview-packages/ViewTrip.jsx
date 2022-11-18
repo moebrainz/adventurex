@@ -167,26 +167,20 @@ export default () => {
                 <div className="col-xl-8">
                   <h5 className="_heading"> Activities</h5>
                   <div className="d-flex flex-row flex-wrap">
-                    {getviewList.activities?.map((list, i) => (
-                      // let a_list = JSON.parse(list);
-                      // console.log(a_list, "this list");
+                    {getviewList.activities?.map((list, i) => {
+                      let a_list = JSON.parse(list);
+                      console.log(a_list, "this list");
 
-                      <div
-                        className="badge rounded-pill pill my-2 mx-2"
-                        key={i}
-                      >
-                        <p className=" p-2 mb-0">{list}</p>
-                        {/* {console.log(list)} */}
-                      </div>
-                      // return a_list.map((e) => (
-                      //   <div
-                      //     className="badge rounded-pill pill my-2 mx-2"
-                      //     key={i}
-                      //   >
-                      //     <p className=" p-2 mb-0">{e?.value}</p>
-                      //   </div>
-                      // ));
-                    ))}
+                      return a_list.map((e) => (
+                        <div
+                          className="badge rounded-pill pill my-2 mx-2"
+                          key={i}
+                        >
+                          <p className=" p-2 mb-0">{e?.value}</p>
+                          {console.log(e?.value, "values")}
+                        </div>
+                      ));
+                    })}
                   </div>
                 </div>
                 {/* <div className="col-xl-4 ps-1">

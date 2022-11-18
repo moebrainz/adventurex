@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import React, { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
+import { useToast } from "@chakra-ui/react";
 
 import styled from "styled-components";
 import download from "../../assets/images/x_download_icon.png";
@@ -45,15 +46,28 @@ const FileContainer = styled.div`
 const fileTypes = ["JPEG", "PNG", "GIF"];
 
 const InputFIle = ({ title, onChange }) => {
+  const toast = useToast();
+
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const handleChange = (file) => {
     //check that the img exist
     if (!file || file.length === 0) return;
-    setFile(file[0]);
-    setPreviewUrl(URL.createObjectURL(file[0]));
-    onChange(file[0]);
-    console.log(file[0], "files in inputs");
+    if (file[0].size > 3000000) {
+      return toast({
+        position: "bottom",
+        title: "File too large",
+        description: "Upload files lesser than 3mb",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    } else {
+      setFile(file[0]);
+      setPreviewUrl(URL.createObjectURL(file[0]));
+      onChange(file[0]);
+      console.log(file[0], "files in inputs");
+    }
   };
 
   // const reader = new FileReader();

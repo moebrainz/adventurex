@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
+import { useToast } from "@chakra-ui/react";
 
 import styled from "styled-components";
 import download from "../../assets/images/x_download_icon.png";
@@ -47,6 +48,8 @@ const FileContainer = styled.div`
 const fileTypes = ["JPEG", "PNG", "GIF"];
 
 const InputFilesm = ({ title, inputname, onChange }) => {
+  const toast = useToast();
+
   //state for handling multiple image input
   const [updateImage, setUpdateImage] = React.useState([]);
   const [editIndex, setEditIndex] = React.useState(null);
@@ -58,11 +61,22 @@ const InputFilesm = ({ title, inputname, onChange }) => {
 
   const handleImageUpdate = (file) => {
     if (!file || file.length === 0) return;
-    setFile(file[0]);
+    if (file[0].size > 3000000) {
+      return toast({
+        position: "bottom",
+        title: "File too large",
+        description: "Upload files lesser than 3mb",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    } else {
+      setFile(file[0]);
 
-    setUpdateImage([...updateImage, URL.createObjectURL(file[0])]);
-    setGetFiles([...getFiles, file[0]]);
-    setPreviewUrl([URL.createObjectURL(file[0])]);
+      setUpdateImage([...updateImage, URL.createObjectURL(file[0])]);
+      setGetFiles([...getFiles, file[0]]);
+      setPreviewUrl([URL.createObjectURL(file[0])]);
+    }
   };
   onChange(getFiles);
 
@@ -165,7 +179,7 @@ const InputFilesm = ({ title, inputname, onChange }) => {
           <div className="row">
             <div className="pe-3">
               <FileWrapper className="mb-4">
-                <FileContainer className="p-3">
+                <FileContainer className="">
                   <div className="" key={index}>
                     {/* {pill.value} */}
                     {/* {console.log(item, "njcjk")} */}

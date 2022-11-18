@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
+import explorexLoader from "../../assets/explore.gif";
 
 import Button from "../buttons/Button";
 import ButtonWhite from "../buttons/ButtonWhite";
@@ -209,22 +210,26 @@ export default () => {
         headers: { Authorization: `Bearer ${admin}` },
       });
       setLoading(false);
-      if (response && response?.data?.success === true) {
-        return toast(
-          response?.data?.message || {
-            position: "bottom-right",
-            title: "Package created.",
-            description: "Your package have been added successfully.",
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          }
-        );
+
+      // console.log(
+      //   response?.data?.message,
+      //   response?.data?.status,
+      //   "frm response"
+      // );
+      if (response && response?.data?.status === "ok") {
+        return toast({
+          position: "bottom",
+          title: "Created.",
+          description: response?.data?.message,
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
       }
     } catch (error) {
       setLoading(false);
       return toast({
-        position: "bottom-right",
+        position: "bottom",
         title: "Error",
         description: "Error Adding Package",
         status: "error",
@@ -308,7 +313,10 @@ export default () => {
             <EditWrapper className="container-fluid">
               {loading ? (
                 <div className="spinner_wrapper">
-                  <Spinner thickness="4px" size="lg" color="#0fa05a" />
+                  {/* <Spinner thickness="4px" size="lg" color="#0fa05a" /> */}
+                  <div className="loader_wrapper">
+                    <img src={explorexLoader} alt="" />
+                  </div>
                 </div>
               ) : (
                 <div className="container bg-white p-5 border-round form_wrapper m-0">
@@ -453,7 +461,7 @@ export default () => {
                         <label htmlFor="priceperperson" className="form-label">
                           Price per Person
                         </label>
-                        <div className="ppp_input_wrapper">
+                        <div className="ppperson_input_wrapper">
                           <span
                             className="mb-4 input-group-text"
                             id="basic-addon2"
@@ -520,19 +528,27 @@ export default () => {
                             >
                               Price Per Infant
                             </label>
-                            <input
-                              type="number"
-                              className="form-control mb-4"
-                              placeholder="Price Per Infant"
-                              aria-label="pricePerInfant"
-                              id="pricePerInfant"
-                              name="pricePerInfant"
-                              value={pricePerInfant}
-                              onChange={(e) =>
-                                setPricePerInfant(e.target.value)
-                              }
-                              // required
-                            />
+                            <div className="ppinfants_input_wrapper">
+                              <span
+                                className="mb-4 input-group-text"
+                                id="basic-addon2"
+                              >
+                                $
+                              </span>
+                              <input
+                                type="number"
+                                className="form-control mb-4"
+                                placeholder="Price Per Infant"
+                                aria-label="pricePerInfant"
+                                id="pricePerInfant"
+                                name="pricePerInfant"
+                                value={pricePerInfant}
+                                onChange={(e) =>
+                                  setPricePerInfant(e.target.value)
+                                }
+                                // required
+                              />
+                            </div>
                           </div>
                         ) : (
                           <div className="infant_price_no">
@@ -543,7 +559,6 @@ export default () => {
                               Price Per Infant
                             </label>
                             <div>
-                              <span>$</span>
                               <input
                                 type="number"
                                 className="form-control mb-4"
