@@ -6,6 +6,7 @@ import editicon from "../../assets/images/x_editicon.png";
 import Button from "../buttons/Button";
 import { Link } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
+import deleted from "../../assets/dashboard/x_delete_icon.png";
 
 const CardWrapper = styled.div`
   display: flex;
@@ -89,8 +90,9 @@ const Imagewrapper = styled.div`
   position: relative;
 
   img {
-    width: 100%;
-    height: 100%;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
   }
 
   div {
@@ -108,10 +110,10 @@ const Imagewrapper = styled.div`
     border-radius: 5px;
   }
 
-  div input {
+  div img {
     position: relative;
-    top: 5px;
-    left: 5px !important;
+    top: 10px;
+    left: 200px !important;
   }
 `;
 
@@ -142,7 +144,8 @@ export default ({
         <CardWrap className="card border-0 ">
           <Imagewrapper className="banner_wrapper">
             <div>
-              <input type="checkbox" onClick={onClick} className="p-3" />
+              <img src={deleted} alt="delete_package" onClick={onClick} />
+              {/* <input type="checkbox" className="p-3" /> */}
             </div>
 
             <img src={banner} class="card-img-top" alt="..." />

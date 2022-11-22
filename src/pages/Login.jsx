@@ -96,6 +96,8 @@ const Login = () => {
     // const message = response?.data?.message;
     setAuth({ getEmail, getPwd, firstName, accessToken, success });
 
+    //setting Local Storages
+    localStorage.setItem("username", firstName);
     localStorage.setItem("adminToken", accessToken);
 
     setGetEmail("");

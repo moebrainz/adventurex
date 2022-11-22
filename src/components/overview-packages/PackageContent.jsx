@@ -6,8 +6,11 @@ import deleted from "../../assets/dashboard/x_delete_icon.png";
 import postaxios from "../../api/postaxios";
 import useLogin from "../hooks/useLogin";
 
+import { useToast } from "@chakra-ui/react";
+
 import "../../css/PackageContent.css";
 import CardOverview from "../card-reviews/CardOverview";
+import DeleteModal from "../modals/DeleteModal";
 
 const VIEW_URL = "/live-package";
 const DELETE_URL = "/packages";
@@ -33,6 +36,13 @@ const CardWrapper = styled.div`
 export default () => {
   const [listData, setListData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+
+  const [getDelete, setGetDelete] = React.useState(false);
+
+  const handleDeleteModal = () => setGetDelete(false);
+
+  //importing toast
+  const toast = useToast();
 
   //calling global state
   const { auth, listPackages, setListPackages } = useLogin();
@@ -64,9 +74,24 @@ export default () => {
       // setListData(res?.data?.data);
       // setListPackages(res?.data?.data);
       console.log(res, "Deleted");
+      if (res?.data?.status === "ok") {
+        const newList = [...listPackages];
+        newList.splice(id, 1);
+        setListPackages(newList);
+
+        return toast({
+          position: "bottom",
+          title: "Deleted.",
+          description: res?.data?.message,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      }
 
       return false;
     });
+    setGetDelete(false);
   };
   // console.log(listData, "from list data");
 
@@ -130,16 +155,24 @@ export default () => {
               <div className=" d-flex flex-row flex-wrap gap-3">
                 {listPackages.map((e) => (
                   // console.log(e._id);
-                  <CardOverview
-                    record_id={e._id}
-                    onClick={() => handleDelete(e._id)}
-                    banner={e.bannerImg}
-                    key={e._id}
-                    location={e.packageName}
-                    tags={1000}
-                    bookednum={100}
-                    matchesnum={200}
-                  />
+                  <>
+                    <CardOverview
+                      record_id={e._id}
+                      onClick={() => setGetDelete(true)}
+                      banner={e.bannerImg}
+                      key={e._id}
+                      location={e.packageName}
+                      tags={1000}
+                      bookednum={100}
+                      matchesnum={200}
+                    />
+
+                    <DeleteModal
+                      show={getDelete}
+                      onHide={handleDeleteModal}
+                      onClick={() => handleDelete(e._id)}
+                    />
+                  </>
                 ))}
               </div>
             </CardWrapper>

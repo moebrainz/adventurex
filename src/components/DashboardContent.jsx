@@ -29,13 +29,15 @@ const CardWrapper = styled.div`
   overflow: hidden;
 `;
 const DashboardContent = () => {
+  //getting LocalStorage
+  const userName = localStorage.getItem("username");
   const { auth } = useLogin();
   return (
     <>
       <div className="container-fluid">
         <DashContentWrapper>
           <div className="">
-            <p className="_heading">{`Hello ${auth.firstName}`}</p>
+            <p className="_heading">{`Hello ${userName}`}</p>
             <p className="_subheading">Here is your latest report</p>
           </div>
           <div className="dash__section2 container-fluid px-0">

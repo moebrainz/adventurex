@@ -155,6 +155,7 @@ export default () => {
     setPilldisplay2(pilldisplay2.filter((pills) => pills.value !== x));
   };
 
+  //add package function
   const handleAddPackage = async (e) => {
     e.preventDefault();
 
@@ -284,7 +285,138 @@ export default () => {
 
     // console.log(response);
   };
-  // console.log(packageName);
+
+  // add package draft function
+
+  const handleDraftPackage = async (e) => {
+    e.preventDefault();
+
+    let reqHeader = new Headers();
+    reqHeader.append("Authorization", `Bearer ${admin}`);
+
+    const packages = {
+      packageName: packageName,
+      about: about,
+      availabilityDate: availabilityDate,
+      availabilityTime: availabilityTime,
+      pricePerPerson: price,
+      travelStyle: travelStyle,
+      ageRange: ageRange,
+      accomodation: accomodationLodging,
+      activities: pilldisplay,
+      thumbnail: thumbnail,
+      bannerImg: bannerthumbnail,
+      tripDuration: travelDuration,
+      citiesImages: citiesImages,
+      withInfant: pricePerInfant,
+    };
+
+    let frmD = new FormData();
+    frmD.append("packageName", packageName);
+    frmD.append("about", about);
+    frmD.append("pricePerPerson", price);
+    frmD.append("availabilityDate", availabilityDate);
+    frmD.append("availabilityTime", availabilityTime);
+    // frmD.append("pricePerPerson", price);
+    frmD.append("travelStyle", travelStyle);
+    // frmD.append("infantBilling", infantBilling);
+    frmD.append("ageRange", ageRange);
+    frmD.append("accomodation", accomodationLodging);
+    frmD.append("activities", JSON.stringify(pilldisplay));
+    frmD.append("thumbnail", thumbnail);
+    frmD.append("bannerImg", bannerthumbnail);
+    frmD.append("tripDuration", travelDuration);
+    frmD.append("withInfant", pricePerInfant);
+    frmD.append("citiesImages", citiesImages);
+
+    console.log(frmD, "all data");
+    // let sendData = JSON.stringify({ packages });
+    setLoading(true);
+
+    // console.log(response, "from response");
+    // console.log(config);
+
+    // return console.log(response, "response");
+
+    try {
+      const response = await postaxios.post(PACKAGE_LIVE_URL, frmD, {
+        headers: { Authorization: `Bearer ${admin}` },
+      });
+      setLoading(false);
+
+      // console.log(
+      //   response?.data?.message,
+      //   response?.data?.status,
+      //   "frm response"
+      // );
+      if (response && response?.data?.status === "ok") {
+        return toast({
+          position: "bottom",
+          title: "Created.",
+          description: response?.data?.message,
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+      return toast({
+        position: "bottom",
+        title: "Error",
+        description: "Error Adding Package",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+
+    // setLoading(false);
+
+    // setLoading(false);
+    //   console.log(error.message, "error occured");
+    //   if (response.error || response?.data?.success !== true) {
+    //     return toast({
+    //       position: "bottom-right",
+    //       title: "Unauthoriseze user",
+    //       description: response?.data?.message,
+    //       status: "error",
+    //       duration: 9000,
+    //       isClosable: true,
+    //     });
+    //   }
+
+    // .catch((e) => ({ error: e }));
+    // setLoading(true);
+
+    // if (response || response?.data?.success === true) {
+    //   return toast(
+    //     response?.data?.message || {
+    //       position: "bottom-right",
+    //       title: "Package created.",
+    //       description: "Your package have been added successfully.",
+    //       status: "success",
+    //       duration: 9000,
+    //       isClosable: true,
+    //     }
+    //   );
+    // }
+
+    //  else {
+    //     return toast(
+    //       response?.data?.message || {
+    //         position: "bottom-right",
+    //         title: "Package created.",
+    //         description: "Your package have been added successfully.",
+    //         status: "success",
+    //         duration: 9000,
+    //         isClosable: true,
+    //       }
+    //     );
+    //   }
+
+    // console.log(response);
+  };
 
   return (
     <>

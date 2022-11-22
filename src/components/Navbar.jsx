@@ -22,6 +22,9 @@ const NavContainer = styled.div`
 const Navbar = ({ title }) => {
   const { auth, setAuth, login, setLogin } = useLogin();
 
+  //getting LocalStorage
+  const userName = localStorage.getItem("username");
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -81,7 +84,7 @@ const Navbar = ({ title }) => {
                     <div>
                       <img src={avatar} />
                     </div>
-                    <p className="pt-2">{auth.firstName}</p>
+                    <p className="pt-2">{userName}</p>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
