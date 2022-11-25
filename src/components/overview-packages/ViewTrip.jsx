@@ -71,11 +71,16 @@ export default () => {
                   </div>
                 </div>
                 <div className="d-flex flex-row flex-wrap col-xl-4">
-                  <div className="d-flex flex-row ">
-                    <div className="view_smimg">
-                      <img src={viewsm1} alt="" className=" mx-2 " />
+                  {getviewList.citiesImages?.map((city, i) => (
+                    <div className="d-flex flex-row " key={i}>
+                      <div className="view_smimg">
+                        <img src={city} alt="" className=" mx-2 " />
+                        {console.log(city, "from city")}
+                      </div>
                     </div>
-                    <div className="view_smimg">
+                  ))}
+
+                  {/* <div className="view_smimg">
                       <img src={viewsm1} alt="" className=" mx-2 " />
                     </div>
                   </div>
@@ -85,18 +90,7 @@ export default () => {
                     </div>
                     <div className="view_smimg">
                       <img src={viewsm2} alt="" className=" mx-2 " />
-                    </div>
-                  </div>
-                  {/* <div className="row ">
-                    <div className="col ">
-                      <div className="view_smimg">
-                        <img src={viewsm2} alt="" className=" mx-2 mb-2" />
-                      </div>
-                      <div className="view_smimg">
-                        <img src={viewsm2} alt="" className=" mx-2 mb-2" />
-                      </div>
-                    </div>
-                  </div> */}
+                    </div> */}
                 </div>
               </div>
               <div className="row align-items-baseline">

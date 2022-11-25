@@ -98,7 +98,8 @@ export default () => {
   const [thumbnail, setThumbnail] = React.useState("");
   const [bannerthumbnail, setBannerthumbnail] = React.useState("");
   const [travelDuration, setTravelDuration] = React.useState("");
-  let [citiesImages, setCitiesImages] = React.useState([]);
+  let [citiesImages, setCitiesImages] = React.useState([""]);
+  // let [addCitiesImages, setAddCitiesImages] = React.useState("");
 
   let [inputData, setInputData] = useState("");
   let [pilldisplay, setPilldisplay] = useState([]);
@@ -112,6 +113,21 @@ export default () => {
     margin: "0 auto",
     borderColor: "white",
   };
+
+  //function for adding cities images in an array
+  // const addImages = (e) => {
+  //   e.preventDefault();
+
+  //   if (!addCitiesImages) return;
+  //   setCitiesImages([
+  //     ...citiesImages,
+  //     {
+  //       id: citiesImages.length,
+  //       value: addCitiesImages,
+  //     },
+  //   ]);
+  //   setAddCitiesImages("");
+  // };
 
   // console.log(bannerthumbnail, "banner thumb");
   // console.log(thumbnail, "banner thumb");
@@ -195,7 +211,10 @@ export default () => {
     frmD.append("bannerImg", bannerthumbnail);
     frmD.append("tripDuration", travelDuration);
     frmD.append("withInfant", pricePerInfant);
-    frmD.append("citiesImages", citiesImages);
+    for (let i = 0; i < citiesImages.length; i++) {
+      frmD.append("citiesImages", citiesImages[i]);
+      // formData.append(files[i].name, files[i])
+    }
 
     console.log(frmD, "all data");
     // let sendData = JSON.stringify({ packages });
@@ -417,6 +436,8 @@ export default () => {
 
     // console.log(response);
   };
+
+  console.log(citiesImages, "c images");
 
   return (
     <>
@@ -831,7 +852,6 @@ export default () => {
                         <div className="file_inputsm">
                           <InputFilesm
                             title={`Cites & Attractions`}
-                            inputname="citiesImages"
                             onChange={(e) => setCitiesImages(e)}
                           />
                         </div>

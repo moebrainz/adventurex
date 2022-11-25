@@ -70,6 +70,8 @@ const InputFIle = ({ title, onChange }) => {
     }
   };
 
+  console.log(file, "files in inputs");
+
   // const reader = new FileReader();
   // reader.onloadend = (e) => {
   //   previewUrl = e.target.result;

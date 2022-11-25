@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import addpackage from "../../assets/dashboard/x_addpackage.png";
 import deleted from "../../assets/dashboard/x_delete_icon.png";
+// import deleted from "../../assets/dashboard/delete.svg";
 import postaxios from "../../api/postaxios";
 import useLogin from "../hooks/useLogin";
 
@@ -159,7 +160,7 @@ export default () => {
                     <CardOverview
                       record_id={e._id}
                       onClick={() => setGetDelete(true)}
-                      banner={e.bannerImg}
+                      banner={e.thumbnail}
                       key={e._id}
                       location={e.packageName}
                       tags={1000}

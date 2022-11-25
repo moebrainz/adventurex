@@ -6,7 +6,7 @@ import editicon from "../../assets/images/x_editicon.png";
 import Button from "../buttons/Button";
 import { Link } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
-import deleted from "../../assets/dashboard/x_delete_icon.png";
+import deleted from "../../assets/dashboard/delete.svg";
 
 const CardWrapper = styled.div`
   display: flex;
@@ -90,20 +90,21 @@ const Imagewrapper = styled.div`
   position: relative;
 
   img {
-    width: 18px;
-    height: 18px;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
   }
 
   div {
     background-color: black;
-    opacity: 0.6;
+    opacity: 0.8;
     width: 230px;
     height: 145px;
     position: absolute;
     display: none;
     border-radius: 5px;
   }
+
   &:hover div {
     display: block !important;
     z-index: 100;
@@ -121,12 +122,20 @@ const CardContainer = styled.div`
   padding: 7px;
 `;
 
-// const DeleteWrapper = styled.div`
+const DeleteWrapper = styled.div`
+  z-index: 10;
 
-//   &:hover {
-
-//   }
-// `;
+  img {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  div img {
+    position: relative;
+    top: 10px;
+    left: 200px !important;
+  }
+`;
 
 export default ({
   bookednum,
@@ -144,7 +153,14 @@ export default ({
         <CardWrap className="card border-0 ">
           <Imagewrapper className="banner_wrapper">
             <div>
-              <img src={deleted} alt="delete_package" onClick={onClick} />
+              <DeleteWrapper>
+                <img
+                  src={deleted}
+                  alt="delete_package"
+                  onClick={onClick}
+                  className="delete_package"
+                />
+              </DeleteWrapper>
               {/* <input type="checkbox" className="p-3" /> */}
             </div>
 

@@ -43,7 +43,7 @@ const Navbar = ({ title }) => {
   };
 
   React.useEffect(() => {
-    if (login === false) {
+    if (login === false && userName === null) {
       navigate("/");
       console.log(login, "from effects");
       console.log(auth.success, "success status");

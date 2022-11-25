@@ -76,9 +76,9 @@ const InputFilesm = ({ title, inputname, onChange }) => {
       setUpdateImage([...updateImage, URL.createObjectURL(file[0])]);
       setGetFiles([...getFiles, file[0]]);
       setPreviewUrl([URL.createObjectURL(file[0])]);
+      onChange(getFiles);
     }
   };
-  onChange(getFiles);
 
   // // const imageFile = Array.from(getFiles);
   // const imgf = getFiles.map((f) => {
