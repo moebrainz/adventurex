@@ -598,6 +598,7 @@ export default () => {
                             value={travelStyle}
                             onChange={(e) => setTravelStyle(e.target.value)}
                           >
+                            <option value="">--select an option--</option>
                             <option value="Private">Private</option>
                             <option value="Self guided">Self Guided</option>
                             <option value="Small group">{`Small Group < 12`}</option>
@@ -646,6 +647,7 @@ export default () => {
                             value={ageRange}
                             onChange={(e) => setAgeRange(e.target.value)}
                           >
+                            <option value="">--select an option--</option>
                             <option value="5-9">5-9</option>
                             <option value="10-15">10-15</option>
                             <option value="16-20">16-20</option>
@@ -667,6 +669,7 @@ export default () => {
                             value={infantBilling}
                             onChange={(e) => setInfantBilling(e.target.value)}
                           >
+                            <option value="">--select an option--</option>
                             <option value="no">No</option>
                             <option value="yes">Yes</option>
                           </select>
@@ -746,7 +749,10 @@ export default () => {
                               setAccomodationLodging(e.target.value)
                             }
                           >
-                            <option value="2 Star">2 star</option>
+                            <option value="">--select an option--</option>
+                            <option defaultValue="2 Star" value="2 Star">
+                              2 star
+                            </option>
                             <option value="3 Star">3 star</option>
                             <option value="4 Star">4 star</option>
                             <option value="5 Star">5 star</option>
