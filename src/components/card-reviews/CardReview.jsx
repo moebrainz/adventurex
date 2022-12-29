@@ -84,12 +84,12 @@ const CardContainer = styled.div`
   padding: 7px;
 `;
 
-export default ({ bookednum, matchesnum, location, tags }) => {
+export default ({ bookednum, matchesnum, location, tags, booked_Id, src }) => {
   return (
     <>
-      <CardWrapper className="">
+      <CardWrapper className="px-1">
         <CardWrap className="card border-0 ">
-          <ImageIcon src={avatar1} class="card-img-top" alt="..." />
+          <ImageIcon src={src} class="card-img-top" alt="..." />
           <CardContainer className="card-body">
             <SectionOneWrapper>
               <p className="mb-0">{location}</p>
@@ -105,7 +105,7 @@ export default ({ bookednum, matchesnum, location, tags }) => {
               <p className="mb-0">Matches</p>
             </SectionTwoWrapper>
             <SectionThreeWrapper>
-              <Link to="bookedreview">
+              <Link to={`bookedreview/${booked_Id}`}>
                 <Button width={226} height={33} content="Review" />
               </Link>
             </SectionThreeWrapper>

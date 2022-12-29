@@ -60,7 +60,7 @@ const appRouter = [
         element: <BookedPackageHome />,
       },
       {
-        path: "bookedreview",
+        path: "bookedreview/:id",
         children: [
           {
             path: "",

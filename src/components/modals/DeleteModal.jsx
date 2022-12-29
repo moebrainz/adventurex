@@ -43,7 +43,7 @@ export default ({ onHide, show, onClick }) => {
             <Heading className="">Do you want to delete this package?</Heading>
             <span className="d-flex flex-row justify-between p-1 gap-4 py-2">
               <ButtonYes onClick={onClick}>Yes</ButtonYes>{" "}
-              <ButtonNo>No</ButtonNo>
+              <ButtonNo onHide={onHide}>No</ButtonNo>
             </span>
           </div>
         </Modal.Body>

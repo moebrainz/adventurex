@@ -6,13 +6,16 @@ import { useNavigate } from "react-router-dom";
 
 const Admins = () => {
   React.useEffect(() => {
-    if (auth.accessToken === "") {
+    if (auth?.accessToken === "") {
       navigate("/login");
     }
   }, []);
 
   const navigate = useNavigate();
   const { auth } = useLogin();
+
+  // console.log(auth?.success, "success");
+
   return (
     <Layout pageTitle="Admins">
       <Outlet />

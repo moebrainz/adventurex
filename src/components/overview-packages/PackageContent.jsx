@@ -12,9 +12,11 @@ import { useToast } from "@chakra-ui/react";
 import "../../css/PackageContent.css";
 import CardOverview from "../card-reviews/CardOverview";
 import DeleteModal from "../modals/DeleteModal";
+import EditPackageModal from "../modals/EditPackageModal";
 
 const VIEW_URL = "/live-package";
 const DELETE_URL = "/packages";
+const MAX_LEN = 40;
 
 const DashContentWrapper = styled.div`
   display: flex;
@@ -35,12 +37,14 @@ const CardWrapper = styled.div`
   overflow: hidden;
 `;
 export default () => {
-  const [listData, setListData] = React.useState([]);
+  // const [listStatus, setListStatus] = React.useState();
   const [isLoading, setIsLoading] = React.useState(false);
 
   const [getDelete, setGetDelete] = React.useState(false);
+  const [getEdit, setGetEdit] = React.useState(false);
 
   const handleDeleteModal = () => setGetDelete(false);
+  const handleEditModal = () => setGetEdit(false);
 
   //importing toast
   const toast = useToast();
@@ -59,11 +63,13 @@ export default () => {
 
   React.useEffect(() => {
     postaxios.get(VIEW_URL, config).then((res) => {
-      setListData(res?.data?.data);
+      // setListStatus(res?.data?.status);
       setListPackages(res?.data?.data);
       console.log(listPackages, "from listing");
     });
   }, []);
+
+  // console.log(listStatus, "status");
 
   const handleDelete = async (id) => {
     console.log(id, "from id");
@@ -159,19 +165,39 @@ export default () => {
                   <>
                     <CardOverview
                       record_id={e._id}
-                      onClick={() => setGetDelete(true)}
+                      onClickDelete={() => setGetDelete(true)}
                       banner={e.thumbnail}
                       key={e._id}
-                      location={e.packageName}
+                      // location={e.packageName}
+                      location={
+                        e.packageName.length > MAX_LEN
+                          ? `${e.packageName.substring(0, MAX_LEN)} ...`
+                          : e.packageName
+                      }
                       tags={1000}
                       bookednum={100}
                       matchesnum={200}
+                      onClickEdit={() => setGetEdit(true)}
                     />
 
                     <DeleteModal
                       show={getDelete}
                       onHide={handleDeleteModal}
                       onClick={() => handleDelete(e._id)}
+                    />
+                    <EditPackageModal
+                      onHide={handleEditModal}
+                      show={getEdit}
+                      pname={e.packageName}
+                      pdate={e.availabilityDate}
+                      pPrice={e.pricePerPerson}
+                      pabout={e.about}
+                      ptime={e.availabilityTime}
+                      pduration={e.tripDuration}
+                      paccomodationLodging={e.accomodation}
+                      pageRange={e.ageRange}
+                      pinfantBilling={e.withInfant}
+                      ptravelStyle={e.travelStyle}
                     />
                   </>
                 ))}

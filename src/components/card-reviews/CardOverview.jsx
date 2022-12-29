@@ -13,8 +13,8 @@ const CardWrapper = styled.div`
 `;
 
 const CardWrap = styled.div`
-  width: 250px;
-  height: 277px;
+  width: 255px;
+  height: 290px;
   align-items: center;
   padding: 1px;
 `;
@@ -23,7 +23,7 @@ const SectionOneWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 0;
+  padding: 5px 5px;
 
   img {
     height: 11px;
@@ -70,7 +70,8 @@ const SectionTwoWrapper = styled.div`
 const SectionThreeWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 5px 3px;
+  margin: 7px 3px;
+  padding: 10px 0px
   justify-content: space-between;
 
   img {
@@ -144,7 +145,8 @@ export default ({
   tags,
   record_id,
   banner,
-  onClick,
+  onClickDelete,
+  onClickEdit,
 }) => {
   const { listPackages } = useLogin();
   return (
@@ -157,7 +159,7 @@ export default ({
                 <img
                   src={deleted}
                   alt="delete_package"
-                  onClick={onClick}
+                  onClick={onClickDelete}
                   className="delete_package"
                 />
               </DeleteWrapper>
@@ -191,8 +193,13 @@ export default ({
                 </Link>
               ))} */}
 
-              <div className="ps-3">
-                <img src={editicon} alt="" />
+              <div className="ps-3" style={{ cursor: "pointer" }}>
+                <img
+                  src={editicon}
+                  alt=""
+                  onClick={onClickEdit}
+                  style={{ cursor: "pointer" }}
+                />
               </div>
             </SectionThreeWrapper>
           </CardContainer>

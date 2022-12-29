@@ -49,6 +49,7 @@ const Navbar = ({ title }) => {
       console.log(auth.success, "success status");
     }
   }, [handleLogout]);
+  console.log(auth?.success, "success status");
 
   // console.log(login, "login boolean");
   return (

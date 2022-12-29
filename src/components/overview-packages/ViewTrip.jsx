@@ -28,9 +28,12 @@ export default () => {
 
   const { listPackages } = useLogin();
 
+  // console.log(listPackages, "from list");
+
   React.useEffect(() => {
     const viewPackages = listPackages.findIndex((i) => i._id === params.id);
     let viewList = listPackages[viewPackages];
+    // console.log(viewPackages, "result from viewpackages");
     setGetViewList(viewList);
     // return () => viewList;
   }, []);
@@ -105,7 +108,9 @@ export default () => {
                     </div> */}
                   </span>
 
-                  <p className="_subheading">{getviewList.about}</p>
+                  <p className="_subheading" style={{ whiteSpace: "pre-line" }}>
+                    {getviewList.about}
+                  </p>
                 </div>
                 <div className="col-xl-4 ps-1">
                   {/* left section */}
