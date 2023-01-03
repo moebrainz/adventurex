@@ -27,7 +27,6 @@ const BookedAdultTable = ({ data, availability }) => (
         </div>
       </Link>
     </td>
-    <td>Adult</td>
   </tr>
 );
 const BookedTeenTable = ({ data, availability }) => (
@@ -48,7 +47,6 @@ const BookedTeenTable = ({ data, availability }) => (
         </div>
       </Link>
     </td>
-    <td>Teenager</td>
   </tr>
 );
 const BookedChildrenTable = ({ data, availability }) => (
@@ -69,7 +67,6 @@ const BookedChildrenTable = ({ data, availability }) => (
         </div>
       </Link>
     </td>
-    <td>Child</td>
   </tr>
 );
 const BookedInfantTable = ({ data, availability }) => (
@@ -90,7 +87,6 @@ const BookedInfantTable = ({ data, availability }) => (
         </div>
       </Link>
     </td>
-    <td>Infant</td>
   </tr>
 );
 
@@ -249,7 +245,6 @@ export default () => {
                         <th scope="col">BOOKED DATE</th>
                         <th scope="col">BOOKING NO</th>
                         <th scope="col">ACTION</th>
-                        <th scope="col">PASSENGER</th>
                       </tr>
                     </thead>
                     <tbody>

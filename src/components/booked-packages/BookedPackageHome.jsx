@@ -35,6 +35,8 @@ const BookedWrapper = styled.div`
 export default () => {
   const [bookedPackages, getBookedPackages] = React.useState();
 
+  const [err, setErr] = React.useState();
+
   const [allBooked, getAllBooked] = React.useState("");
 
   // const getBookings = React.useRef();
@@ -76,9 +78,22 @@ export default () => {
         .get(BOOKED_URL, config)
         .then((res) => {
           getBookedPackages(res?.data?.data);
+          setErr(res?.data?.data);
         })
-        .catch((error) => console.log("error", error));
+        .catch((error) => {
+          // setErr(error);
+          if (error.response) {
+            localStorage.setItem("err", JSON.stringify(error.response.status));
+          }
+          console.log(error.response.status, "error");
+        });
     };
+
+    // console.log(err, "error");
+
+    const MsgErr = JSON.parse(localStorage.getItem("err"));
+
+    console.log(MsgErr, "eooers");
 
     handleBookedPackage();
 
