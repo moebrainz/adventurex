@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   //   }
   // }, []);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { auth, setLogin, setAuth } = useLogin();
 
   return (

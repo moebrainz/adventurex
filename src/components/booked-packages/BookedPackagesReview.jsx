@@ -173,7 +173,7 @@ export default () => {
   }, []);
 
   console.log(getBookedList);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // to={navigate("/booked")}
 

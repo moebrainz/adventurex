@@ -11,10 +11,11 @@ const CardWrapper = styled.div`
 `;
 
 const CardWrap = styled.div`
-  width: 250px;
+  width: 235px;
   height: 277px;
   align-items: center;
-  padding: 1px;
+  padding: 7px;
+  margin-bottom: 10px;
 `;
 const SectionOneWrapper = styled.div`
   display: flex;

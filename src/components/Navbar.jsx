@@ -45,7 +45,7 @@ const Navbar = ({ title }) => {
   const MsgError = JSON.parse(localStorage.getItem("err"));
 
   React.useEffect(() => {
-    if ((login === false && userName === null) || MsgError === 401) {
+    if (login === false && userName === null) {
       navigate("/");
       console.log(login, "from effects");
       console.log(auth.success, "success status");
