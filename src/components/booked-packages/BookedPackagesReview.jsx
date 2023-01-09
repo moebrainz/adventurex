@@ -173,7 +173,7 @@ export default () => {
   }, []);
 
   console.log(getBookedList);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // to={navigate("/booked")}
 
@@ -185,7 +185,12 @@ export default () => {
             <nav className="breadcrumb_wrapper" aria-label="breadcrumb">
               <ol className="breadcrumb ol_list_breadcrumb">
                 <li className="breadcrumb-item">
-                  <Link to={""} className="breadcrumb_link">
+                  <Link
+                    onClick={() => navigate(-1)}
+                    // to={"/booked"}
+                    // to={navigate("/booked")}
+                    className="breadcrumb_link"
+                  >
                     Booked packages
                   </Link>{" "}
                 </li>
