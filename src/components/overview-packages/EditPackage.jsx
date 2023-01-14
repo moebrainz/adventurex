@@ -63,8 +63,8 @@ export default () => {
   const toast = useToast();
 
   //call on use ref
-  const dateRef = useRef();
-  const timeRef = useRef();
+  const stateDateRef = useRef();
+  const endDateRef = useRef();
 
   //call the global state that stores the images
   const { auth } = useLogin();
@@ -85,8 +85,8 @@ export default () => {
   //DATA STATES FOR EACH INPUTS
   const [packageName, setPackageName] = React.useState("");
   // const [expiringDate, setExpiringDate] = React.useState("");
-  const [availabilityDate, setAvailabilityDate] = React.useState("");
-  const [availabilityTime, setAvailabilityTime] = React.useState("");
+  const [availabilityStartDate, setAvailabilityStartDate] = React.useState("");
+  const [availabilityEndDate, setAvailabilityEndStart] = React.useState("");
   const [about, setAbout] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [infantBilling, setInfantBilling] = React.useState("");
@@ -181,8 +181,8 @@ export default () => {
     const packages = {
       packageName: packageName,
       about: about,
-      availabilityDate: availabilityDate,
-      availabilityTime: availabilityTime,
+      availabilityDate: availabilityStartDate,
+      closingDate: availabilityEndDate,
       pricePerPerson: price,
       travelStyle: travelStyle,
       ageRange: ageRange,
@@ -199,8 +199,8 @@ export default () => {
     frmD.append("packageName", packageName);
     frmD.append("about", about);
     frmD.append("pricePerPerson", price);
-    frmD.append("availabilityDate", availabilityDate);
-    frmD.append("availabilityTime", availabilityTime);
+    frmD.append("availabilityDate", availabilityStartDate);
+    frmD.append("closingDate", availabilityEndDate);
     // frmD.append("pricePerPerson", price);
     frmD.append("travelStyle", travelStyle);
     // frmD.append("infantBilling", infantBilling);
@@ -316,8 +316,8 @@ export default () => {
     const packages = {
       packageName: packageName,
       about: about,
-      availabilityDate: availabilityDate,
-      availabilityTime: availabilityTime,
+      availabilityDate: availabilityStartDate,
+      closingDate: availabilityEndDate,
       pricePerPerson: price,
       travelStyle: travelStyle,
       ageRange: ageRange,
@@ -334,8 +334,8 @@ export default () => {
     frmD.append("packageName", packageName);
     frmD.append("about", about);
     frmD.append("pricePerPerson", price);
-    frmD.append("availabilityDate", availabilityDate);
-    frmD.append("availabilityTime", availabilityTime);
+    frmD.append("availabilityDate", availabilityStartDate);
+    frmD.append("availabilityTime", availabilityEndDate);
     // frmD.append("pricePerPerson", price);
     frmD.append("travelStyle", travelStyle);
     // frmD.append("infantBilling", infantBilling);
@@ -502,31 +502,31 @@ export default () => {
                           <input
                             className="form-control mb-4"
                             type="text"
-                            ref={dateRef}
-                            placeholder="Choose a date"
-                            onFocus={() => (dateRef.current.type = "date")}
-                            onBlur={() => (dateRef.current.type = "text")}
-                            id="availabilityDate"
-                            name="availabilityDate"
+                            ref={stateDateRef}
+                            placeholder="Choose a Starting Date"
+                            onFocus={() => (stateDateRef.current.type = "date")}
+                            onBlur={() => (stateDateRef.current.type = "text")}
+                            id="availabilityStartDate"
+                            name="availabilityStartDate"
                             // defaultValue="Choose a date"
-                            value={availabilityDate}
+                            value={availabilityStartDate}
                             onChange={(e) =>
-                              setAvailabilityDate(e.target.value)
+                              setAvailabilityStartDate(e.target.value)
                             }
                           />
                           <input
                             type="text"
-                            ref={timeRef}
+                            ref={endDateRef}
                             className="form-control mb-4"
-                            placeholder="Choose a time"
-                            aria-label="availabilityTime"
-                            id="availabilityTime"
-                            onFocus={() => (timeRef.current.type = "time")}
-                            onBlur={() => (timeRef.current.type = "text")}
-                            name="availabilityTime"
-                            value={availabilityTime}
+                            placeholder="Choose an Ending Date"
+                            aria-label="availabilityEndDate"
+                            id="availabilityEndDate"
+                            onFocus={() => (endDateRef.current.type = "date")}
+                            onBlur={() => (endDateRef.current.type = "text")}
+                            name="availabilityEndDate"
+                            value={availabilityEndDate}
                             onChange={(e) =>
-                              setAvailabilityTime(e.target.value)
+                              setAvailabilityEndStart(e.target.value)
                             }
                           />
                         </div>
