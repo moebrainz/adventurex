@@ -46,7 +46,7 @@ const appRouter = [
         element: <ViewTrip />,
       },
       {
-        path: "/overview/editpackage",
+        path: "overview/editpackage",
         element: <EditPackage />,
       },
     ],
